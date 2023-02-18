@@ -1,20 +1,99 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".Signin"
+style="@style/Theme.AttMeetnoactiondaynight"
+    >
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:background="@color/white"
+        android:layout_marginBottom="25dp"
+        android:layout_marginTop="25dp"
+        android:gravity="center"
+        >
+        <TextView
+            android:id="@+id/Menuoption_textViewbtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Press to Select"
+            android:layout_marginTop="15dp"
+            android:clickable="true"
+
+            android:backgroundTint="@color/white"
+            android:textColor="@color/black"
+            />
+
+<EditText
+    android:id="@+id/Name_signin"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    tools:context=".Signin"
-    android:background="@color/white">
+    android:textSize="15dp"
+    android:textColorHint="#9E9393"
+    android:hint="Enter Name"
+    android:layout_marginTop="15dp"
+    android:textColor="#7E6767"
+    />
+        <EditText
+            android:id="@+id/Dob_signin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15dp"
+            android:textColorHint="#9E9393"
+            android:hint="Enter DOB"
+            android:textColor="#7E6767"
+            android:layout_marginTop="15dp"
+            />
+        <EditText
+            android:id="@+id/College_signin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15dp"
+            android:textColorHint="#9E9393"
+            android:hint="Enter College Name"
+            android:textColor="#7E6767"
+            android:layout_marginTop="15dp"
+            />
+        <EditText
+            android:id="@+id/Id_signin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15dp"
+            android:layout_marginTop="15dp"
+            android:textColorHint="#9E9393"
+            android:hint="Enter Id No."
+            android:textColor="#7E6767"
+            />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hi"
-        android:textColor="@color/black"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+        <EditText
+            android:layout_marginTop="15dp"
+            android:id="@+id/Stream_signin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15dp"
+            android:textColorHint="#9E9393"
+            android:hint="Enter Stream(CSE)"
+            android:textColor="#7E6767"
+            />
+        <EditText
+            android:id="@+id/Email_signin"
+            android:layout_marginTop="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15dp"
+            android:hint="Enter Email"
+            android:textColorHint="#9E9393"
+            android:textColor="#7E6767"
+            />
+
+    </LinearLayout>
+
+</ScrollView>

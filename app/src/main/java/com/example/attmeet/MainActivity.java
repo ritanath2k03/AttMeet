@@ -123,9 +123,7 @@ login_btn.setVisibility(View.VISIBLE);
 signin_btn.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View view) {
-
-        dialog.setContentView(R.layout.activity_signin);
-        dialog.show();
+        startActivity(new Intent(MainActivity.this,Signin.class));
 
     }
 });
