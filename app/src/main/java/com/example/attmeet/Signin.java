@@ -5,6 +5,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.ContextMenu;
@@ -20,12 +21,19 @@ import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 
+import org.jitsi.meet.sdk.JitsiMeetActivity;
+import org.jitsi.meet.sdk.JitsiMeetConferenceOptions;
+
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.HashMap;
 
 public class Signin extends AppCompatActivity  implements PopupMenu.OnMenuItemClickListener {
 TextView menu_dropdown,cancel,submit;
-NavigationView navigationView;
-EditText Email,Stream,Name,DOB,College_name,Id;
+
+EditText Email=null,Stream,Name,DOB,College_name,Id;
+
+    String[] permission = {"android.permission.CAMERA"};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,10 +56,41 @@ menu_dropdown.setOnClickListener(new View.OnClickListener() {
         Showpopup(view);
     }
 });
+        String url="fdsfagasgdfbdagrehbfxb";
+
+submit.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View view) {
+       {
+
+           requestPermissions(permission, 1);
+       }
 
 
 
     }
+});
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults)
+    {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == 1) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(this, "Camera Permission accepted", Toast.LENGTH_SHORT).show();
+            }
+            JitsiMeetConferenceOptions options = new JitsiMeetConferenceOptions.Builder()
+                    .setRoom(Email.getText().toString())
+                    .build();
+            JitsiMeetActivity.launch(this, options);
+
+        }else {
+            Toast.makeText(this, "Camera Permission Decline", Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
 
     private void Showpopup(View v) {
         PopupMenu popupMenu=new PopupMenu(this,v);
