@@ -29,6 +29,7 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity {
     private TextView textView,textView1;
     private Handler handler,handler1;
+
     private long startTime, currentTime, finishedTime = 0;
     private int duration = 10000 / 4,duration1=8000/4;// 1 character is equal to 1 second. if want to
     // reduce. can use as divide

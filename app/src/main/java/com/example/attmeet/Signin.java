@@ -3,10 +3,13 @@ package com.example.attmeet;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-
+import java.util.*;
+import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.Menu;
@@ -15,11 +18,20 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import org.jitsi.meet.sdk.JitsiMeetActivity;
 import org.jitsi.meet.sdk.JitsiMeetConferenceOptions;
@@ -28,49 +40,140 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.HashMap;
 
-public class Signin extends AppCompatActivity  implements PopupMenu.OnMenuItemClickListener {
-TextView menu_dropdown,cancel,submit;
-
-EditText Email=null,Stream,Name,DOB,College_name,Id;
-
+public class Signin extends AppCompatActivity   {
+TextView cancel,submit;
+ImageView Profile_pic;
+TextInputEditText Email=null,University_name=null,College_name=null,Id=null,Password=null;
+    String url="fdsfagasgdfbdagrehbfxb";
     String[] permission = {"android.permission.CAMERA"};
+FirebaseAuth signinAuth=FirebaseAuth.getInstance();
+
+FirebaseDatabase database=FirebaseDatabase.getInstance();
+DatabaseReference reference=database.getReference();
+ProgressDialog progressDialog;
+
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signin);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        menu_dropdown=findViewById(R.id.Menuoption_textViewbtn);
 
+        Profile_pic=findViewById(R.id.Profile_pic);
+
+        University_name=findViewById(R.id.University_signin);
         Email=findViewById(R.id.Email_signin);
-        Stream=findViewById(R.id.Stream_signin);
-        Name=findViewById(R.id.Name_signin);
-        DOB=findViewById(R.id.Dob_signin);
         College_name=findViewById(R.id.College_signin);
         Id=findViewById(R.id.Id_signin);
         cancel=findViewById(R.id.Cancel_button);
         submit=findViewById(R.id.Submit_button);
-        //For Dromdown menu
-menu_dropdown.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View view) {
-        Showpopup(view);
-    }
-});
-        String url="fdsfagasgdfbdagrehbfxb";
+        Password=findViewById(R.id.Password_signin);
+        //For Sending Firebase
+        Profile_pic=findViewById(R.id.Profile_pic);
+//
+
+        String Got_CollegeName= College_name.getText().toString();
+        String Got_CollegeId= Id.getText().toString();
+        String Got_University= University_name.getText().toString();
+        String Got_Email= Email.getText().toString();
+        String Got_Password=Password.getText().toString();
 
 submit.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View view) {
-       {
 
-           requestPermissions(permission, 1);
-       }
+        //For Sending Firebase
+        submit_data_in_Firebase();
 
 
 
     }
 });
+
+cancel.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View view) {
+        startActivity(new Intent(Signin.this,MainActivity.class));
     }
+});
+    }
+
+    private void submit_data_in_Firebase() {
+        String got_collegeName= College_name.getText().toString().toUpperCase();
+        String got_collegeId= Id.getText().toString().toUpperCase();
+        String got_university= University_name.getText().toString().toUpperCase();
+        String got_email= Email.getText().toString().toUpperCase();
+        String got_password=Password.getText().toString();
+        HashMap<String,Object> map=new HashMap<>();
+        map.put("Email",got_email);
+        map.put("Password",got_password);
+
+    if (TextUtils.isEmpty(got_collegeName)){
+        College_name.setError("Enter a Valid Name");
+        return;
+    }
+
+        else if (TextUtils.isEmpty(got_collegeId)){
+        Id.setError("Enter a Valid id");
+        return;
+    }
+        else if(TextUtils.isEmpty(got_university)){
+            University_name.setError("Enter a Valid University");
+            return;
+        }
+      else if(TextUtils.isEmpty(got_email)){
+            Email.setError("Enter a Valid Email");
+            return;
+        } else if (TextUtils.isEmpty(got_password)) {
+          Password.setError("This is mandatory");
+
+    } else{
+            reference.child(got_university).child(got_collegeId).child(got_collegeName)
+                    .setValue(map)
+                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            createAccount();
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(Signin.this, e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
+        }
+
+    }
+
+    private void createAccount() {
+        progressDialog=new ProgressDialog(Signin.this);
+        String Got_Email= Email.getText().toString();
+        String Got_Password=Password.getText().toString();
+        progressDialog.setTitle("Just a moment....");
+        progressDialog.setMessage("We are Creating Your Account");
+        progressDialog.show();
+         signinAuth.createUserWithEmailAndPassword(Got_Email,Got_Password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+             @Override
+             public void onComplete(@NonNull Task<AuthResult> task) {
+                 progressDialog.dismiss();
+                 if(task.isSuccessful()){
+                     Toast.makeText(Signin.this, "New Activity", Toast.LENGTH_SHORT).show();
+                     Email.setText("");
+                     University_name.setText("");
+                     College_name.setText("");
+                     Password.setText("");
+                     Id.setText("");
+                 }
+                 else {
+                     Toast.makeText(Signin.this, task.getException().getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+
+                 }
+             }
+         });
+     }
+
+
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults)
@@ -81,7 +184,7 @@ submit.setOnClickListener(new View.OnClickListener() {
                 Toast.makeText(this, "Camera Permission accepted", Toast.LENGTH_SHORT).show();
             }
             JitsiMeetConferenceOptions options = new JitsiMeetConferenceOptions.Builder()
-                    .setRoom(Email.getText().toString())
+                    .setRoom(url)
                     .build();
             JitsiMeetActivity.launch(this, options);
 
@@ -92,76 +195,25 @@ submit.setOnClickListener(new View.OnClickListener() {
     }
 
 
-    private void Showpopup(View v) {
-        PopupMenu popupMenu=new PopupMenu(this,v);
-        popupMenu.setOnMenuItemClickListener((PopupMenu.OnMenuItemClickListener) this);
-        popupMenu.inflate(R.menu.signin_menu);
-        popupMenu.show();
+
+
+
+
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.d("Stop","on");
     }
 
     @Override
-    public boolean onMenuItemClick(MenuItem menuItem) {
-        switch (menuItem.getItemId()){
-            case R.id.Administration:
-
-                menu_dropdown.setText("Administration");
-                Log.d("menu","working");
-               Name.setVisibility(View.INVISIBLE);
-               DOB.setHint("Date From");
-               Stream.setHint("University");
-               getAllData(1);
-                break;
-            case R.id.Teacher:
-
-                menu_dropdown.setText("Teacher");
-                Log.d("menu","working");
-                Name.setVisibility(View.VISIBLE);
-                DOB.setHint("Enter DOB");
-                Stream.setHint("Enter Subject");
-                getAllData(2);
-                break;
-            case R.id.Student:
-
-                menu_dropdown.setText("Student");
-                Log.d("menu","working");
-                Name.setVisibility(View.VISIBLE);
-                DOB.setHint("Enter DOB");
-                Stream.setHint("Enter Stream");
-                getAllData(3);
-                break;
-        }
-        return false;
+    protected void onResume() {
+        super.onResume();
+        Log.d("OnResume","on");
     }
 
-    private void getAllData(int i) {
-        if(i==1){
-           String Got_DateFrom= DOB.getText().toString();
-            String Got_CollegeName= College_name.getText().toString();
-            String Got_CollegeId= Id.getText().toString();
-            String Got_University= Stream.getText().toString();
-            String Got_Email= Email.getText().toString();
-
-
-        }
-        else if(i==2){
-            String Got_TeacherName= Name.getText().toString();
-            String Got_TeacherDOB= DOB.getText().toString();
-            String Got_CollegeName= College_name.getText().toString();
-            String Got_TeacherId= Id.getText().toString();
-            String Got_Subject= Stream.getText().toString();
-            String Got_TeacherEmail= Email.getText().toString();
-        }
-        else if(i==3){
-            String Got_StudentName= Name.getText().toString();
-            String Got_StudentDOB= DOB.getText().toString();
-            String Got_CollegeName= College_name.getText().toString();
-            String Got_StudentId= Id.getText().toString();
-            String Got_StudentStream= Stream.getText().toString();
-            String Got_TeacherEmail= Email.getText().toString();
-        }
+    public void ChooseProfilePic(View view) {
 
 
     }
-
-
 }
