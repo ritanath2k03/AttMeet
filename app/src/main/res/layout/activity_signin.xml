@@ -6,7 +6,9 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".Signin"
-    style="@style/Theme.AttMeetnoactiondaynight">
+    style="@style/Theme.AttMeetnoactiondaynight"
+    android:background="@drawable/background"
+    >
 
 
     <LinearLayout
@@ -14,89 +16,190 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
 android:layout_gravity="center"
-        android:background="@color/white"
         android:layout_marginBottom="25dp"
 
         android:gravity="center"
+        android:layout_marginStart="20dp"
+
+        android:layout_marginEnd="20dp"
+
         >
 
         <TextView
             android:id="@+id/Menuoption_textViewbtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Press to Select"
+            android:text="Administration"
             android:layout_marginTop="15dp"
             android:clickable="true"
+            android:textSize="20dp"
 
+            android:textStyle="bold"
             android:backgroundTint="@color/white"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             />
-
-<EditText
-    android:id="@+id/Name_signin"
-    android:layout_width="wrap_content"
+<com.google.android.material.textfield.TextInputLayout
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:textSize="15dp"
-    android:textColorHint="#9E9393"
-    android:hint="Enter Name"
-    android:layout_marginTop="15dp"
-    android:textColor="#7E6767"
-    />
-        <EditText
-            android:id="@+id/Dob_signin"
-            android:layout_width="wrap_content"
+    android:textColorHint="@color/white"
+    app:boxBackgroundColor="@color/purple_200"
+app:boxStrokeColor="@color/teal_200"
+
+    app:hintTextColor="@color/white"
+    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+    <com.google.android.material.textfield.TextInputEditText
+
+        android:textSize="15dp"
+
+        android:id="@+id/College_signin"
+        android:inputType="text"
+        android:hint="Enter College Name"
+
+        android:textColor="#7E6767"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_marginTop="20dp"
+
+        />
+    </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="15dp"
-            android:textColorHint="#9E9393"
-            android:hint="Enter DOB"
-            android:textColor="#7E6767"
-            android:layout_marginTop="15dp"
-            />
-        <EditText
-            android:id="@+id/College_signin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="15dp"
-            android:textColorHint="#9E9393"
-            android:hint="Enter College Name"
-            android:textColor="#7E6767"
-            android:layout_marginTop="15dp"
-            />
-        <EditText
-            android:id="@+id/Id_signin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="15dp"
-            android:layout_marginTop="15dp"
-            android:textColorHint="#9E9393"
-            android:hint="Enter Id No."
-            android:textColor="#7E6767"
-            />
+            android:textColorHint="@color/white"
+
+            app:boxBackgroundColor="@color/purple_200"
+            app:boxStrokeColor="@color/teal_200"
+
+            app:hintTextColor="@color/white"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/Id_signin"
+                android:inputType="number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="15dp"
+
+                android:textColorHint="#9E9393"
+                android:hint="Enter College Id"
+                android:textColor="#7E6767"
+
+                android:layout_marginTop="20dp"
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+  <com.google.android.material.textfield.TextInputLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:textColorHint="@color/white"
+      app:boxBackgroundColor="@color/purple_200"
+      app:boxStrokeColor="@color/teal_200"
+
+      app:hintTextColor="@color/white"
+      style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+      <com.google.android.material.textfield.TextInputEditText
+
+          android:id="@+id/University_signin"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:textSize="15dp"
+          android:inputType="text"
+          android:textColorHint="#9E9393"
+          android:hint="Enter University"
+          android:textColor="#7E6767"
+
+          android:layout_marginTop="20dp"
+          />
+  </com.google.android.material.textfield.TextInputLayout>
 
 
-        <EditText
-            android:layout_marginTop="15dp"
-            android:id="@+id/Stream_signin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="15dp"
-            android:textColorHint="#9E9393"
-            android:hint="Enter Stream(CSE)"
-            android:textColor="#7E6767"
-            />
-        <EditText
-            android:id="@+id/Email_signin"
-            android:layout_marginTop="15dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="15dp"
-            android:hint="Enter Email"
-            android:textColorHint="#9E9393"
-            android:textColor="#7E6767"
-            />
+  <com.google.android.material.textfield.TextInputLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:textColorHint="@color/white"
+      app:boxBackgroundColor="@color/purple_200"
+      app:boxStrokeColor="@color/teal_200"
+
+      app:hintTextColor="@color/white"
+      style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+      <com.google.android.material.textfield.TextInputEditText
+          android:id="@+id/Email_signin"
+
+          android:inputType="textEmailAddress"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:textSize="15dp"
+          android:hint="Enter Email"
+          android:textColorHint="#9E9393"
+          android:textColor="#7E6767"
+
+          android:layout_marginTop="20dp"
+
+          />
+  </com.google.android.material.textfield.TextInputLayout>
+
+<com.google.android.material.textfield.TextInputLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:textColorHint="@color/white"
+    app:boxBackgroundColor="@color/purple_200"
+    app:boxStrokeColor="@color/teal_200"
+
+    app:hintTextColor="@color/white"
+    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+    >
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/Password_signin"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="15dp"
+        android:hint="Enter New Password"
+        android:paddingStart="20dp"
+        android:textColorHint="#9E9393"
+        android:textColor="#7E6767"
+        android:inputType="textPassword"
+
+
+        android:layout_marginTop="20dp"
+        />
+</com.google.android.material.textfield.TextInputLayout>
+
+
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:layout_marginTop="10dp"
+       android:orientation="horizontal">
+       <ImageView
+           android:id="@+id/Profile_pic"
+           android:layout_width="90dp"
+           android:layout_height="90dp"
+         android:layout_marginLeft="50dp"
+           tools:srcCompat="@tools:sample/avatars" />
+
+       <Button
+           android:id="@+id/Choose_profile_pic"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="Choose A Pic"
+           android:gravity="center"
+           android:layout_marginLeft="40dp"
+           android:onClick="ChooseProfilePic"
+           android:textColor="@color/black"
+           android:backgroundTint="#48D837E4"
+           android:layout_gravity="center"/>
+
+
+   </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:orientation="horizontal">
             <TextView
                 android:id="@+id/Cancel_button"
@@ -104,7 +207,7 @@ android:layout_gravity="center"
                 android:layout_height="wrap_content"
                 android:text="Cancel "
                 android:layout_marginStart="40dp"
-                android:background="#F30000"
+                android:background="#FF9090"
                 android:padding="5dp"
                 android:textColor="@color/black"
                 android:layout_marginLeft="20dp"
@@ -116,14 +219,13 @@ android:layout_gravity="center"
                 android:text="SUBMIT "
                 android:padding="5dp"
                 android:layout_marginStart="170dp"
-                android:background="#00FF49"
+                android:background="#007B7B"
                 android:textColor="@color/black"
                 android:layout_marginLeft="20dp"
                 />
 
 
         </LinearLayout>
-
     </LinearLayout>
 
 </ScrollView>
