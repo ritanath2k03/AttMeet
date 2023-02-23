@@ -128,6 +128,12 @@ signin_btn.setOnClickListener(new View.OnClickListener() {
 
     }
 });
+login_btn.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View view) {
+        startActivity(new Intent(MainActivity.this,Login.class));
+    }
+});
     }
 
 

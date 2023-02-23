@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/rounded_file"
+    >
+
+<TextView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Choose the Correct one"
+    android:textSize="30dp"
+    android:textColor="@color/white"
+    android:textStyle="bold"
+    android:gravity="center_horizontal"/>
+    <TextView
+        android:id="@+id/Administration_login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Administration"
+        android:textSize="25dp"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="30dp"/>
+    <TextView
+        android:id="@+id/Teacher_login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Teacher"
+        android:textSize="25dp"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="15dp"/>
+    <TextView
+        android:id="@+id/Student_login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Student"
+        android:textSize="25dp"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="15dp"/>
+
+
+</LinearLayout>
