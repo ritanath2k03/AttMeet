@@ -108,6 +108,7 @@ cancel.setOnClickListener(new View.OnClickListener() {
         map.put("Email",got_email);
         map.put("Password",got_password);
 
+
     if (TextUtils.isEmpty(got_collegeName)){
         College_name.setError("Enter a Valid Name");
         return;
@@ -128,7 +129,7 @@ cancel.setOnClickListener(new View.OnClickListener() {
           Password.setError("This is mandatory");
 
     } else{
-            reference.child(got_university).child(got_collegeId).child(got_collegeName)
+            reference.child("Administration").child(got_university).child(got_collegeId).child(got_collegeName)
                     .setValue(map)
                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override

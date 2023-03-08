@@ -55,7 +55,7 @@ app:boxStrokeColor="@color/teal_200"
         android:inputType="text"
         android:hint="Enter College Name"
 
-        android:textColor="#7E6767"
+        android:textColor="#050505"
 
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -84,7 +84,7 @@ app:boxStrokeColor="@color/teal_200"
 
                 android:textColorHint="#9E9393"
                 android:hint="Enter College Id"
-                android:textColor="#7E6767"
+                android:textColor="#050505"
 
                 android:layout_marginTop="20dp"
                 />
@@ -109,7 +109,7 @@ app:boxStrokeColor="@color/teal_200"
           android:inputType="text"
           android:textColorHint="#9E9393"
           android:hint="Enter University"
-          android:textColor="#7E6767"
+          android:textColor="#050505"
 
           android:layout_marginTop="20dp"
           />
@@ -134,7 +134,7 @@ app:boxStrokeColor="@color/teal_200"
           android:textSize="15dp"
           android:hint="Enter Email"
           android:textColorHint="#9E9393"
-          android:textColor="#7E6767"
+          android:textColor="#050505"
 
           android:layout_marginTop="20dp"
 
@@ -160,7 +160,7 @@ app:boxStrokeColor="@color/teal_200"
         android:hint="Enter New Password"
         android:paddingStart="20dp"
         android:textColorHint="#9E9393"
-        android:textColor="#7E6767"
+        android:textColor="#050505"
         android:inputType="textPassword"
 
 

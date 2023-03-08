@@ -65,7 +65,7 @@
                 android:layout_marginTop="20dp"
                 android:hint="Enter College Name"
                 android:inputType="text"
-                android:textColor="#7E6767"
+                android:textColor="#050505"
 
                 android:textSize="15dp"
 
@@ -91,7 +91,7 @@
                 android:hint="Enter College Id"
 
                 android:inputType="number"
-                android:textColor="#7E6767"
+                android:textColor="#050505"
                 android:textColorHint="#9E9393"
 
                 android:textSize="15dp" />
@@ -116,7 +116,7 @@
                 android:layout_marginTop="20dp"
                 android:hint="Enter University"
                 android:inputType="text"
-                android:textColor="#7E6767"
+                android:textColor="#050505"
                 android:textColorHint="#9E9393"
 
                 android:textSize="15dp" />
@@ -141,7 +141,7 @@
                 android:layout_marginTop="20dp"
                 android:hint="Enter Email"
                 android:inputType="textEmailAddress"
-                android:textColor="#7E6767"
+                android:textColor="#050505"
                 android:textColorHint="#9E9393"
 
                 android:textSize="15dp"
@@ -168,7 +168,7 @@
                 android:hint="Enter Password"
                 android:inputType="textPassword"
                 android:paddingStart="20dp"
-                android:textColor="#7E6767"
+                android:textColor="#050505"
                 android:textColorHint="#9E9393"
 
 
