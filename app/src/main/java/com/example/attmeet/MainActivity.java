@@ -26,6 +26,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 public class MainActivity extends AppCompatActivity {
     private TextView textView,textView1;
     private Handler handler,handler1;
@@ -52,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
         signin_btn=findViewById(R.id.signin);
 
         textView1 = (TextView) findViewById(R.id.Welcome_word2);
-        textView1.setText("EDU MEET ");
+        textView1.setText("ATT MEET ");
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -118,6 +120,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void show() {
+FirebaseAuth auth=FirebaseAuth.getInstance();
+if(auth.getUid()!=null){
+    Intent intent=new Intent(MainActivity.this,Administration.class);
+//    intent.putExtra("College_name",getIntent().getStringExtra("College_name"));
+    startActivity(intent);
+
+}
+
 signin_btn.setVisibility(View.VISIBLE);
 login_btn.setVisibility(View.VISIBLE);
         Dialog dialog=new Dialog(this);

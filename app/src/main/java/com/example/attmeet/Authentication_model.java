@@ -3,14 +3,18 @@ package com.example.attmeet;
 import java.util.Objects;
 
 public class Authentication_model {
-String University;
+    String University;
     String College;
     String Stream;
     String Year;
     String Roll;
     String Name;
- String Password;
-  String Email;
+    String Password;
+    String Email;
+
+    public Authentication_model(String college) {
+        College = college;
+    }
 
     public Authentication_model() {
 

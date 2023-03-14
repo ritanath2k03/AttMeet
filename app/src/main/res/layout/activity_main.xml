@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
+    android:background="@drawable/background"
     >
 
     <TextView
@@ -17,15 +18,16 @@
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.101"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.348" />
+        app:layout_constraintVertical_bias="0.359" />
 
     <TextView
         android:id="@+id/Welcome_word2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="EDU MEET"
+        android:text="ATT MEET"
         android:textSize="25dp"
         android:textStyle="bold|italic"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -35,66 +37,55 @@
         app:layout_constraintTop_toBottomOf="@+id/Welcome_word"
         app:layout_constraintVertical_bias="0.058" />
 
-    <TextView
-        android:id="@+id/Welcome_word3"
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:text="___________________________"
-        android:textSize="25dp"
-
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Welcome_word2"
-        app:layout_constraintVertical_bias="0.037" />
-
     <Button
         android:id="@+id/login"
         android:layout_width="79dp"
         android:layout_height="79dp"
 
 
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="52dp"
         android:backgroundTint="#48D837E4"
         android:insetLeft="0dp"
         android:insetTop="0dp"
         android:insetRight="0dp"
+
         android:insetBottom="0dp"
         android:text="Login"
-        app:cornerRadius="50dp"
-
-        app:layout_constraintEnd_toStartOf="@+id/signin"
-        app:layout_constraintHorizontal_bias="0.679"
-        app:layout_constraintStart_toStartOf="parent"
         android:visibility="invisible"
-        app:layout_constraintTop_toBottomOf="@+id/Welcome_word3" />
+        app:cornerRadius="50dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.102"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Welcome_word2" />
 
     <Button
         android:id="@+id/signin"
         android:layout_width="79dp"
         android:layout_height="79dp"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="96dp"
+
+        android:layout_marginTop="52dp"
         android:backgroundTint="#48D837E4"
 
         android:insetLeft="0dp"
         android:insetTop="0dp"
-
         android:insetRight="0dp"
         android:insetBottom="0dp"
         android:text="Sign in"
         android:visibility="invisible"
         app:cornerRadius="50dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Welcome_word3" />
+        app:layout_constraintHorizontal_bias="0.858"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Welcome_word2" />
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="80dp"
-        android:layout_height="70dp"
-        android:layout_marginBottom="44dp"
+        android:layout_width="105dp"
+        android:layout_height="102dp"
+        android:layout_marginBottom="28dp"
         app:layout_constraintBottom_toTopOf="@+id/Welcome_word"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.169"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/logo_main" />
 

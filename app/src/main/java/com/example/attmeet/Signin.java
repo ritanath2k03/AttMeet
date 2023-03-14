@@ -30,8 +30,11 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import org.jitsi.meet.sdk.JitsiMeetActivity;
 import org.jitsi.meet.sdk.JitsiMeetConferenceOptions;
@@ -41,7 +44,7 @@ import java.net.URL;
 import java.util.HashMap;
 
 public class Signin extends AppCompatActivity   {
-TextView cancel,submit;
+TextView cancel,submit,Login;
 ImageView Profile_pic;
 TextInputEditText Email=null,University_name=null,College_name=null,Id=null,Password=null;
     String url="fdsfagasgdfbdagrehbfxb";
@@ -50,6 +53,7 @@ FirebaseAuth signinAuth=FirebaseAuth.getInstance();
 
 FirebaseDatabase database=FirebaseDatabase.getInstance();
 DatabaseReference reference=database.getReference();
+DatabaseReference referance1=database.getReference("CollegeNames");
 ProgressDialog progressDialog;
 
     @SuppressLint("MissingInflatedId")
@@ -96,6 +100,13 @@ cancel.setOnClickListener(new View.OnClickListener() {
         startActivity(new Intent(Signin.this,MainActivity.class));
     }
 });
+Login=findViewById(R.id.clicktologin);
+Login.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View view) {
+        startActivity(new Intent(Signin.this,Login.class));
+    }
+});
     }
 
     private void submit_data_in_Firebase() {
@@ -129,12 +140,17 @@ cancel.setOnClickListener(new View.OnClickListener() {
           Password.setError("This is mandatory");
 
     } else{
-            reference.child("Administration").child(got_university).child(got_collegeId).child(got_collegeName)
+            reference.child(got_university).child(got_collegeId).child(got_collegeName).child("Administration")
                     .setValue(map)
                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
-                            createAccount();
+
+                            Intent intent=new Intent(Signin.this,Administration.class);
+                            intent.putExtra("College_name",got_collegeName);
+
+                            createAccount(intent,got_collegeName);
+
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
@@ -147,13 +163,20 @@ cancel.setOnClickListener(new View.OnClickListener() {
 
     }
 
-    private void createAccount() {
+    private void StoreCollegename(String got_collegeName) {
+
+        referance1.child(FirebaseAuth.getInstance().getUid()).child("Colleges").setValue(got_collegeName);
+
+    }
+
+    private void createAccount(Intent intent,String got_collegeName) {
         progressDialog=new ProgressDialog(Signin.this);
         String Got_Email= Email.getText().toString();
         String Got_Password=Password.getText().toString();
         progressDialog.setTitle("Just a moment....");
         progressDialog.setMessage("We are Creating Your Account");
         progressDialog.show();
+
          signinAuth.createUserWithEmailAndPassword(Got_Email,Got_Password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
              @Override
              public void onComplete(@NonNull Task<AuthResult> task) {
@@ -165,6 +188,8 @@ cancel.setOnClickListener(new View.OnClickListener() {
                      College_name.setText("");
                      Password.setText("");
                      Id.setText("");
+                     StoreCollegename(got_collegeName);
+                    startActivity(intent);
                  }
                  else {
                      Toast.makeText(Signin.this, task.getException().getLocalizedMessage(), Toast.LENGTH_SHORT).show();
