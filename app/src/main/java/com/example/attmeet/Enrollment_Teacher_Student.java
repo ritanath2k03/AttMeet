@@ -111,8 +111,8 @@ Clg_Email=model.getEmail();
     private void StoreData() {
         HashMap<String,Object> map=new HashMap<>();
 
-        map.put("Email",Email.getText().toString().toUpperCase());
-        map.put("Password",Password.getText().toString());
+        map.put("TeacherEmail",Email.getText().toString().toUpperCase());
+        map.put("TeacherPassword",Password.getText().toString());
         reference1.child(University).child(CollegeId).child(Clg_Name).child("Teacher").child(FirebaseAuth.getInstance().getUid()).setValue(map)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
@@ -135,8 +135,8 @@ Clg_Email=model.getEmail();
         map1.put("TeacherId",Id.getText().toString().toUpperCase());
         map1.put("TeacherName",Name.getText().toString().toUpperCase());
         map1.put("TeacherSubject",Subject.getText().toString().toUpperCase());
-        map1.put("Email",Email.getText().toString().toUpperCase());
-        map1.put("Password",Password.getText().toString());
+        map1.put("TeacherEmail",Email.getText().toString().toUpperCase());
+        map1.put("TeacherPassword",Password.getText().toString());
         reference.child("Teachers").child(FirebaseAuth.getInstance().getUid()).setValue(map1).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {

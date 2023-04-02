@@ -30,6 +30,7 @@ public class TeacherAuthenticationAdapter extends RecyclerView.Adapter<TeacherAu
     public void onBindViewHolder(@NonNull TeacherAuthenticationAdapter.ViewHolder holder, int position) {
 TeacherAuthentication_model model=arrayList.get(position);
 holder.College_name.setText(model.getTeacherEmail());
+
     }
 
     @Override

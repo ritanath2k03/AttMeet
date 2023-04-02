@@ -62,6 +62,8 @@ TextInputEditText  Email=null,University_name=null,College_name=null,Id=null,Pas
         Signup=findViewById(R.id.clicktosignup);
         arrayList=new ArrayList<>();
         adapter=new Authentication_adapter(arrayList,this);
+        arrayList1=new ArrayList<>();
+        adapter1=new TeacherAuthenticationAdapter(arrayList1,this);
 
 
 Select.setOnClickListener(new View.OnClickListener() {
@@ -223,24 +225,24 @@ Cancel.setOnClickListener(new View.OnClickListener() {
 //                            Toast.makeText(Login.this, got_university, Toast.LENGTH_SHORT).show();
 //                            Toast.makeText(Login.this, got_collegeId, Toast.LENGTH_SHORT).show();
 
-                            reference1=db.getReference("Users").child(got_university.toUpperCase()).child(got_collegeId.toUpperCase()).child(got_collegeName.toUpperCase()).child("Teacher");
+                            reference1=db.getReference("Users").child(got_university).child(got_collegeId).child(got_collegeName).child("Teacher");
 
                             reference1.addValueEventListener(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                    arrayList.clear();
+                                    arrayList1.clear();
                                     for(DataSnapshot dataSnapshot:snapshot.getChildren()){
-                                        Authentication_model model1=dataSnapshot.getValue((Authentication_model.class));
+                                        TeacherAuthentication_model model1=dataSnapshot.getValue((TeacherAuthentication_model.class));
                                         if(model1==null){
-                                            arrayList.add(new Authentication_model("None","-1"));
+                                            arrayList1.add(new TeacherAuthentication_model("None","-1"));
                                         }else{
 
-                                            arrayList.add(model1);
-                                            Log.d("NamesTeacher",model1.getEmail());
-                                            Log.d("NamesTeacher",model1.getPassword());
+                                            arrayList1.add(model1);
+//                                            Log.d("NamesTeacher",model1.getTeacherEmail());
+//                                            Log.d("NamesTeacher",model1.getTeacherPassword());
                                         }
                                     }
-                                 adapter.notifyDataSetChanged();
+                                 adapter1.notifyDataSetChanged();
                                 }
 
                                 @Override
@@ -249,8 +251,8 @@ Cancel.setOnClickListener(new View.OnClickListener() {
                                 }
                             });
 
-Log.d("Massage",arrayList.toString());
-                            if(arrayList.contains(new Authentication_model(got_email,got_password))){
+Log.d("Massage",arrayList1.toString());
+                            if(arrayList1.contains(new TeacherAuthentication_model(got_email,got_password))){
                                 Toast.makeText(Login.this, "Login Successfull", Toast.LENGTH_SHORT).show();
 
                             }
