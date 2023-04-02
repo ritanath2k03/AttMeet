@@ -3,11 +3,14 @@ package com.example.attmeet;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.Toolbar;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -20,12 +23,12 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 public class Administration extends AppCompatActivity {
-ImageView Teacher_signup,Student_signup;
+ImageView Teacher_signup,Student_signup,imageView;
 TextView teacher_text;
 FirebaseDatabase database=FirebaseDatabase.getInstance();
-DatabaseReference reference=database.getReference();
-Authentication_adapter adapter;
-ArrayList<Authentication_model> list;
+DatabaseReference reference;
+FirebaseAuth auth=FirebaseAuth.getInstance();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,40 +38,69 @@ ArrayList<Authentication_model> list;
 
 
         setSupportActionBar(toolbar);
-        reference=database.getReference().child(FirebaseAuth.getInstance().getUid());
-        list=new ArrayList<>();
-        adapter=new Authentication_adapter(list,this);
+
+//        list=new ArrayList<>();
+//        adapter=new Authentication_adapter(list,this);
+        Teacher_signup=findViewById(R.id.Teacher_Signup);
+        teacher_text=findViewById(R.id.Teacher_text);
+        imageView=findViewById(R.id.imageView2);
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                auth.signOut();
+                startActivity(new Intent(Administration.this,MainActivity.class));
+            }
+        });
+        reference=database.getReference("Users").child(auth.getUid());
         reference.addValueEventListener(new ValueEventListener() {
+
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot dataSnapshot:snapshot.getChildren()){
-                    Authentication_model model=dataSnapshot.getValue(Authentication_model.class);
-                    if(model==null){
-                        list.add(new Authentication_model("null"));
-                    }else{
+//                list.clear();
 
-                        list.add(model);
-                    }
+                if(FirebaseAuth.getInstance().getUid()!=null){
+                    Authentication_model model1=snapshot.getValue(Authentication_model.class);
+                    toolbar.setTitle(model1.getName());
+
                 }
-                adapter.notifyDataSetChanged();
+
+
             }
+
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
         });
-        toolbar.setTitle(list.toString());
 
 
 
-        Teacher_signup=findViewById(R.id.Teacher_Signup);
-        teacher_text=findViewById(R.id.Teacher_text);
 
-        Teacher_signup.setOnClickListener(new View.OnClickListener() {
+       // Toast.makeText(this, reference.toString(), Toast.LENGTH_SHORT).show();
+
+        reference.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onClick(View view) {
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(FirebaseAuth.getInstance().getUid()!=null){
+                    Authentication_model model=snapshot.getValue(Authentication_model.class);
 
+                    Log.d("UNI",model.getUniversity());
+
+                    Log.d("UNI",model.getName());
+
+                    Teacher_signup.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            startActivity(new Intent(Administration.this,Enrollment_Teacher_Student.class));
+
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
 
             }
         });

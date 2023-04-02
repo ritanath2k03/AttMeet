@@ -15,7 +15,7 @@ import java.util.ArrayList;
 public class Authentication_adapter extends RecyclerView.Adapter<Authentication_adapter.ViewHolder> {
     ArrayList<Authentication_model> arrayList;
     Login context;
-
+Administration context1;
     public Authentication_adapter(ArrayList<Authentication_model> arrayList, Administration administrationContext) {
         this.arrayList = arrayList;
         this.administrationContext = administrationContext;
@@ -31,15 +31,14 @@ public class Authentication_adapter extends RecyclerView.Adapter<Authentication_
     @NonNull
     @Override
     public Authentication_adapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view= LayoutInflater.from(context).inflate(R.layout.activity_administration,parent,false);
+        View view= LayoutInflater.from(context1).inflate(R.layout.activity_administration,parent,false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull Authentication_adapter.ViewHolder holder, int position) {
 Authentication_model model=arrayList.get(position);
-
-holder.College_name.setText(model.getCollege());
+holder.College_name.setText(model.getName());
     }
 
     @Override

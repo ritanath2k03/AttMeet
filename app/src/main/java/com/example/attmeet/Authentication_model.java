@@ -4,16 +4,38 @@ import java.util.Objects;
 
 public class Authentication_model {
     String University;
-    String College;
+    String Colleges;
     String Stream;
     String Year;
     String Roll;
     String Name;
     String Password;
     String Email;
+    String CollegeId;
+    String Uid;
 
-    public Authentication_model(String college) {
-        College = college;
+
+
+
+
+    public String getCollegeId() {
+        return CollegeId;
+    }
+
+    public void setCollegeId(String collegeId) {
+        CollegeId = collegeId;
+    }
+
+    public String getUid() {
+        return Uid;
+    }
+
+    public void setUid(String uid) {
+        Uid = uid;
+    }
+
+    public Authentication_model(String colleges) {
+        Colleges = colleges;
     }
 
     public Authentication_model() {
@@ -43,12 +65,12 @@ public class Authentication_model {
         University = university;
     }
 
-    public String getCollege() {
-        return College;
+    public String getColleges() {
+        return Colleges;
     }
 
     public void setCollege(String college) {
-        College = college;
+        Colleges = college;
     }
 
     public String getStream() {
@@ -102,4 +124,6 @@ public class Authentication_model {
     public int hashCode() {
         return Objects.hash(getEmail(),getPassword());
     }
+
 }
+

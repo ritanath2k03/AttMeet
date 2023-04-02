@@ -131,6 +131,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center"
+                        android:textColor="@color/black"
                         android:text="Teacher \nEnroll" />
                 </LinearLayout>
 
@@ -148,6 +149,7 @@
                         android:src="@drawable/logo_main" />
 
                     <TextView
+                        android:id="@+id/StudentEnroll"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center"

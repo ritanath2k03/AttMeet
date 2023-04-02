@@ -18,10 +18,13 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -36,10 +39,13 @@ public class Login extends AppCompatActivity {
 
     TextView Select,Display,admin,teacher,student,Signup;
     FirebaseDatabase db=FirebaseDatabase.getInstance();
-    DatabaseReference reference;
+    DatabaseReference reference,reference1;
     Authentication_adapter adapter;
     ArrayList<Authentication_model> arrayList;
+    ArrayList<TeacherAuthentication_model> arrayList1;
+    TeacherAuthenticationAdapter adapter1;
  TextView Cancel,Submit;
+ FirebaseAuth auth=FirebaseAuth.getInstance();
 TextInputEditText  Email=null,University_name=null,College_name=null,Id=null,Password=null;;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,9 +114,6 @@ Cancel.setOnClickListener(new View.OnClickListener() {
                          String got_university= University_name.getText().toString().toUpperCase();
                          String got_email= Email.getText().toString().toUpperCase();
                          String got_password=Password.getText().toString();
-                         reference=db.getReference().child(got_university).child(got_collegeId).child(got_collegeName);
-
-
 
                          if (TextUtils.isEmpty(got_collegeName)){
                              College_name.setError("Enter a Valid Name");
@@ -121,7 +124,7 @@ Cancel.setOnClickListener(new View.OnClickListener() {
                              return;
                          } else if (TextUtils.isEmpty(got_university)) {
                              Password.setError("Enter Valid University ");
-
+                             return;
                          }
                          else if(TextUtils.isEmpty(got_email)){
                              Email.setError("Enter a Valid Email");
@@ -131,6 +134,7 @@ Cancel.setOnClickListener(new View.OnClickListener() {
 
                          }
                          else{
+                             reference=db.getReference("Users").child(got_university).child(got_collegeId).child(got_collegeName);
 
                              reference.addValueEventListener(new ValueEventListener() {
                                  @Override
@@ -143,6 +147,7 @@ Cancel.setOnClickListener(new View.OnClickListener() {
                                          }else{
                                              
                                              arrayList.add(model);
+                                             Log.d("Names",arrayList.toString());
                                          }
                                      }
                                      adapter.notifyDataSetChanged();
@@ -153,12 +158,17 @@ Cancel.setOnClickListener(new View.OnClickListener() {
 
                                  }
                              });
-                             Log.d("Names",arrayList.toString());
+
 
                              if(arrayList.contains(new Authentication_model(got_email,got_password))){
                                  Intent intent=new Intent(Login.this,Administration.class);
                                  intent.putExtra("College_name",got_collegeName);
-                                 startActivity(intent);
+                                 auth.signInWithEmailAndPassword(got_email,got_password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                                     @Override
+                                     public void onComplete(@NonNull Task<AuthResult> task) {
+                                         startActivity(intent);
+                                     }
+                                 });
 
                              }
                              else {
@@ -166,10 +176,6 @@ Cancel.setOnClickListener(new View.OnClickListener() {
                              }
 
                          }
-
-
-
-
                      }
                  });
              }
@@ -184,12 +190,11 @@ Cancel.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         String got_collegeName= College_name.getText().toString().toUpperCase();
-
                         String got_collegeId= Id.getText().toString().toUpperCase();
                         String got_university= University_name.getText().toString().toUpperCase();
                         String got_email= Email.getText().toString().toUpperCase();
                         String got_password=Password.getText().toString();
-                        reference=db.getReference().child(got_university).child(got_collegeId).child(got_collegeName);
+
 
 
 
@@ -212,32 +217,41 @@ Cancel.setOnClickListener(new View.OnClickListener() {
 
                         }
                         else{
+//                            Toast.makeText(Login.this, got_collegeName, Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(Login.this, got_email, Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(Login.this, got_password, Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(Login.this, got_university, Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(Login.this, got_collegeId, Toast.LENGTH_SHORT).show();
 
-                            reference.addValueEventListener(new ValueEventListener() {
+                            reference1=db.getReference("Users").child(got_university.toUpperCase()).child(got_collegeId.toUpperCase()).child(got_collegeName.toUpperCase()).child("Teacher");
+
+                            reference1.addValueEventListener(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                                     arrayList.clear();
                                     for(DataSnapshot dataSnapshot:snapshot.getChildren()){
-                                        Authentication_model model=dataSnapshot.getValue((Authentication_model.class));
-                                        if(model==null){
+                                        Authentication_model model1=dataSnapshot.getValue((Authentication_model.class));
+                                        if(model1==null){
                                             arrayList.add(new Authentication_model("None","-1"));
                                         }else{
 
-                                            arrayList.add(model);
+                                            arrayList.add(model1);
+                                            Log.d("NamesTeacher",model1.getEmail());
+                                            Log.d("NamesTeacher",model1.getPassword());
                                         }
                                     }
-                                    adapter.notifyDataSetChanged();
+                                 adapter.notifyDataSetChanged();
                                 }
 
                                 @Override
                                 public void onCancelled(@NonNull DatabaseError error) {
-
+                                    Toast.makeText(Login.this, error.toString(), Toast.LENGTH_SHORT).show();
                                 }
                             });
-                            Log.d("Names",arrayList.toString());
 
+Log.d("Massage",arrayList.toString());
                             if(arrayList.contains(new Authentication_model(got_email,got_password))){
-                                Toast.makeText(Login.this, "Next Teacher Activity", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(Login.this, "Login Successfull", Toast.LENGTH_SHORT).show();
 
                             }
                             else {
@@ -268,7 +282,7 @@ Cancel.setOnClickListener(new View.OnClickListener() {
                         String got_university= University_name.getText().toString().toUpperCase();
                         String got_email= Email.getText().toString().toUpperCase();
                         String got_password=Password.getText().toString();
-                        reference=db.getReference().child(got_university).child(got_collegeId).child(got_collegeName);
+                        reference=db.getReference().child(FirebaseAuth.getInstance().getUid()).child(got_university).child(got_collegeId).child(got_collegeName);
 
 
 
@@ -332,9 +346,6 @@ Cancel.setOnClickListener(new View.OnClickListener() {
                 });
             }
         });
-
-
-
 
     }
 }
