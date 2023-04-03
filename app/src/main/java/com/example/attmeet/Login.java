@@ -284,7 +284,6 @@ Log.d("Massage",arrayList1.toString());
                         String got_university= University_name.getText().toString().toUpperCase();
                         String got_email= Email.getText().toString().toUpperCase();
                         String got_password=Password.getText().toString();
-                        reference=db.getReference().child(FirebaseAuth.getInstance().getUid()).child(got_university).child(got_collegeId).child(got_collegeName);
 
 
 
@@ -307,6 +306,7 @@ Log.d("Massage",arrayList1.toString());
 
                         }
                         else{
+                            reference=db.getReference("Users").child(got_university).child(got_collegeId).child(got_collegeName).child("Student");
 
                             reference.addValueEventListener(new ValueEventListener() {
                                 @Override

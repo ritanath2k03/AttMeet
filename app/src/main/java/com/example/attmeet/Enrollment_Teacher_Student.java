@@ -63,7 +63,8 @@ Clg_Password=model.getPassword();
 Clg_Uid=model.getUid();
 CollegeId=model.getCollegeId();
 Clg_Email=model.getEmail();
-                            submit.setOnClickListener(new View.OnClickListener() {
+
+submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 CreateAccount();
