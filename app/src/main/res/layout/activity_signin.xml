@@ -6,9 +6,27 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".Signin"
-    style="@style/Theme.AttMeetnoactiondaynight"
-    android:background="@drawable/background"
+
+    android:background="#00000000"
     >
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <com.scwang.wave.MultiWaveHeader
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:scaleY="1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Welcome_word2"
+        app:layout_constraintVertical_bias="1.0"
+        app:mwhCloseColor="#6300D4"
+        app:mwhIsRunning="true"
+        app:mwhProgress="1"
+        app:mwhStartColor="@color/purple_200"
+        app:mwhVelocity="1"
+        app:mwhWaves="MultiWave"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -21,7 +39,7 @@ android:layout_gravity="center"
         android:layout_marginStart="20dp"
 
         android:layout_marginEnd="20dp"
-
+android:layout_marginTop="10dp"
         >
         <TextView
             android:layout_width="match_parent"
@@ -251,5 +269,5 @@ app:boxStrokeColor="@color/teal_200"
 
         </LinearLayout>
     </LinearLayout>
-
+</LinearLayout>
 </ScrollView>

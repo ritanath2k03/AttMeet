@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.ContactsContract;
@@ -33,13 +34,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Administration extends AppCompatActivity {
-ImageView Teacher_signup,Student_signup,imageView;
+ImageView Teacher_signup,Student_signup,Schedule_admin;
+
 TextView teacher_text;
 FirebaseDatabase database=FirebaseDatabase.getInstance();
 DatabaseReference reference;
 FirebaseAuth auth=FirebaseAuth.getInstance();
 DrawerLayout drawerLayout;
 NavigationView navigationView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -127,7 +130,7 @@ toggle.syncState();
 
         Teacher_signup=findViewById(R.id.Teacher_Signup);
         teacher_text=findViewById(R.id.Teacher_text);
-        imageView=findViewById(R.id.imageView2);
+        Schedule_admin=findViewById(R.id.Schedule_admin);
         Student_signup=findViewById(R.id.Student_signup);
 
         reference=database.getReference("Users").child(auth.getUid());
@@ -164,11 +167,7 @@ toggle.syncState();
                 if(FirebaseAuth.getInstance().getUid()!=null){
                     Authentication_model model=snapshot.getValue(Authentication_model.class);
 
-                    Log.d("UNI",model.getUniversity());
-
-                    Log.d("UNI",model.getName());
-
-                    Teacher_signup.setOnClickListener(new View.OnClickListener() {
+                Teacher_signup.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
                             startActivity(new Intent(Administration.this,Enrollment_Teacher_Student.class));
@@ -190,6 +189,13 @@ toggle.syncState();
             }
         });
 
+
+        Schedule_admin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(Administration.this,Schedule.class));
+            }
+        });
 
     }
 }

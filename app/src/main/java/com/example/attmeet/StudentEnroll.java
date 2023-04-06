@@ -139,25 +139,31 @@ Stream=findViewById(R.id.Teacher_Stream);
         map1.put("StudentEmail",Email.getText().toString().toUpperCase());
         map1.put("StudentPassword",Password.getText().toString());
         map1.put("StudentStream",Stream.getText().toString().toUpperCase());
+        map1.put("StudentUid",auth.getUid());
         reference.child("Student").child(FirebaseAuth.getInstance().getUid()).setValue(map1).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
-                progressDialog.dismiss();
-                Email.setText("");
-                Name.setText("");
-                Subject.setText("");
-                Password.setText("");
-                Id.setText("");
-                Stream.setText("");
-                auth.signInWithEmailAndPassword(Clg_Email,Clg_Password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()){
-                            Toast.makeText(StudentEnroll.this, "Student Enrolled", Toast.LENGTH_SHORT).show();
+reference1.child(auth.getUid()).setValue(map1).addOnCompleteListener(new OnCompleteListener<Void>() {
+    @Override
+    public void onComplete(@NonNull Task<Void> task) {
+        progressDialog.dismiss();
+        Email.setText("");
+        Name.setText("");
+        Subject.setText("");
+        Password.setText("");
+        Id.setText("");
+        Stream.setText("");
+        auth.signInWithEmailAndPassword(Clg_Email,Clg_Password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if (task.isSuccessful()){
+                    Toast.makeText(StudentEnroll.this, "Student Enrolled", Toast.LENGTH_SHORT).show();
 
-                        }
-                    }
-                });
+                }
+            }
+        });
+    }
+});
             }
         });
     }

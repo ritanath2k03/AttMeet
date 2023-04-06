@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -19,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
@@ -197,9 +199,6 @@ Cancel.setOnClickListener(new View.OnClickListener() {
                         String got_email= Email.getText().toString().toUpperCase();
                         String got_password=Password.getText().toString();
 
-
-
-
                         if (TextUtils.isEmpty(got_collegeName)){
                             College_name.setError("Enter a Valid Name");
                             return;
@@ -208,15 +207,15 @@ Cancel.setOnClickListener(new View.OnClickListener() {
                             Email.setError("Enter a Valid College Id");
                             return;
                         } else if (TextUtils.isEmpty(got_university)) {
-                            Password.setError("Enter Valid University ");
-
+                            University_name.setError("Enter Valid University ");
+return;
                         }
                         else if(TextUtils.isEmpty(got_email)){
                             Email.setError("Enter a Valid Email");
                             return;
                         } else if (TextUtils.isEmpty(got_password)) {
                             Password.setError("This is mandatory");
-
+return;
                         }
                         else{
 //                            Toast.makeText(Login.this, got_collegeName, Toast.LENGTH_SHORT).show();
@@ -226,7 +225,6 @@ Cancel.setOnClickListener(new View.OnClickListener() {
 //                            Toast.makeText(Login.this, got_collegeId, Toast.LENGTH_SHORT).show();
 
                             reference1=db.getReference("Users").child(got_university).child(got_collegeId).child(got_collegeName).child("Teacher");
-
                             reference1.addValueEventListener(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -244,7 +242,6 @@ Cancel.setOnClickListener(new View.OnClickListener() {
                                     }
                                  adapter1.notifyDataSetChanged();
                                 }
-
                                 @Override
                                 public void onCancelled(@NonNull DatabaseError error) {
                                     Toast.makeText(Login.this, error.toString(), Toast.LENGTH_SHORT).show();
@@ -254,15 +251,23 @@ Cancel.setOnClickListener(new View.OnClickListener() {
 Log.d("Massage",arrayList1.toString());
                             if(arrayList1.contains(new TeacherAuthentication_model(got_email,got_password))){
                                 Toast.makeText(Login.this, "Login Successfull", Toast.LENGTH_SHORT).show();
+                                auth.signInWithEmailAndPassword(Email.getText().toString(),Password.getText().toString()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<AuthResult> task) {
+                                        if(task.isSuccessful()){
+                                            Intent intent=new Intent(Login.this,TeacherDashboard.class);
 
+                                            startActivity(intent);
+                                         
+                                        }
+                                    }
+                                });
                             }
                             else {
                                 Toast.makeText(Login.this, "Enter Correct Credentials Teacher", Toast.LENGTH_SHORT).show();
                             }
 
                         }
-
-
 
 
                     }
@@ -330,14 +335,19 @@ Log.d("Massage",arrayList1.toString());
                                 }
                             });
                             Log.d("Names",arrayList.toString());
-
+int flag=0;
                             if(arrayList.contains(new Authentication_model(got_email,got_password))){
-                                Toast.makeText(Login.this, "Next Activity student", Toast.LENGTH_SHORT).show();
-
+                                Toast.makeText(Login.this, "Next activity", Toast.LENGTH_SHORT).show();
                             }
                             else {
-                                Toast.makeText(Login.this, "Enter Correct Credentials student", Toast.LENGTH_SHORT).show();
+                                flag+=1;
+                                if(flag==1)
+                                Toast.makeText(Login.this,"Click again to confirm ", Toast.LENGTH_SHORT).show();
+                                else if(flag>=2){
+                                    Toast.makeText(Login.this, "Enter Correct Credentials student", Toast.LENGTH_SHORT).show();
+                                }
                             }
+
 
                         }
 

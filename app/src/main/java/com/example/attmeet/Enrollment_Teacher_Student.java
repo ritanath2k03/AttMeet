@@ -30,8 +30,9 @@ public class Enrollment_Teacher_Student extends AppCompatActivity {
 TextInputEditText Name,Id,Subject,Email,Password;
 TextView submit,Cancel;
 FirebaseDatabase db=FirebaseDatabase.getInstance();
-DatabaseReference reference;
+DatabaseReference reference,reference2;
 DatabaseReference reference1=db.getReference("Users");
+
 FirebaseAuth auth=FirebaseAuth.getInstance();
 String CollegeId,Clg_Email,Clg_Name,Clg_Password,Clg_Uid,University;
 ProgressDialog progressDialog;
@@ -49,6 +50,7 @@ ProgressDialog progressDialog;
 
 
         reference=db.getReference("Users").child(auth.getUid());
+        reference2=db.getReference("Users");
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -141,21 +143,26 @@ submit.setOnClickListener(new View.OnClickListener() {
         reference.child("Teachers").child(FirebaseAuth.getInstance().getUid()).setValue(map1).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
-progressDialog.dismiss();
-                Email.setText("");
-                Name.setText("");
-                Subject.setText("");
-                Password.setText("");
-                Id.setText("");
-                auth.signInWithEmailAndPassword(Clg_Email,Clg_Password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-if (task.isSuccessful()){
-    Toast.makeText(Enrollment_Teacher_Student.this, "Teacher Enrolled", Toast.LENGTH_SHORT).show();
+     reference2.child(auth.getUid()).setValue(map1).addOnCompleteListener(new OnCompleteListener<Void>() {
+         @Override
+         public void onComplete(@NonNull Task<Void> task) {
+             progressDialog.dismiss();
+             Email.setText("");
+             Name.setText("");
+             Subject.setText("");
+             Password.setText("");
+             Id.setText("");
+             auth.signInWithEmailAndPassword(Clg_Email,Clg_Password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                 @Override
+                 public void onComplete(@NonNull Task<AuthResult> task) {
+                     if (task.isSuccessful()){
+                         Toast.makeText(Enrollment_Teacher_Student.this, "Teacher Enrolled", Toast.LENGTH_SHORT).show();
 
-}
-                    }
-                });
+                     }
+                 }
+             });
+         }
+     });
             }
         });
     }

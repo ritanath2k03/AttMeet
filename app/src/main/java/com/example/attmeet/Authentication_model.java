@@ -13,10 +13,47 @@ public class Authentication_model {
     String Email;
     String CollegeId;
     String Uid;
+String TeacherEmail,TeacherId,TeacherName,TeacherPassword,TeacherSubject;
 
+    public String getTeacherEmail() {
+        return TeacherEmail;
+    }
 
+    public void setTeacherEmail(String teacherEmail) {
+        TeacherEmail = teacherEmail;
+    }
 
+    public String getTeacherId() {
+        return TeacherId;
+    }
 
+    public void setTeacherId(String teacherId) {
+        TeacherId = teacherId;
+    }
+
+    public String getTeacherName() {
+        return TeacherName;
+    }
+
+    public void setTeacherName(String teacherName) {
+        TeacherName = teacherName;
+    }
+
+    public String getTeacherPassword() {
+        return TeacherPassword;
+    }
+
+    public void setTeacherPassword(String teacherPassword) {
+        TeacherPassword = teacherPassword;
+    }
+
+    public String getTeacherSubject() {
+        return TeacherSubject;
+    }
+
+    public void setTeacherSubject(String teacherSubject) {
+        TeacherSubject = teacherSubject;
+    }
 
     public String getCollegeId() {
         return CollegeId;
