@@ -335,17 +335,19 @@ Log.d("Massage",arrayList1.toString());
                                 }
                             });
                             Log.d("Names",arrayList.toString());
-int flag=0;
+
                             if(arrayList.contains(new Authentication_model(got_email,got_password))){
-                                Toast.makeText(Login.this, "Next activity", Toast.LENGTH_SHORT).show();
+                                auth.signInWithEmailAndPassword(Email.getText().toString(),Password.getText().toString()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<AuthResult> task) {
+
+                                        startActivity(new Intent(Login.this,Student_Dashboard.class));
+                                    }
+                                });
                             }
                             else {
-                                flag+=1;
-                                if(flag==1)
-                                Toast.makeText(Login.this,"Click again to confirm ", Toast.LENGTH_SHORT).show();
-                                else if(flag>=2){
-                                    Toast.makeText(Login.this, "Enter Correct Credentials student", Toast.LENGTH_SHORT).show();
-                                }
+                                Toast.makeText(Login.this, "Enter Correct Credentials student", Toast.LENGTH_SHORT).show();
+
                             }
 
 

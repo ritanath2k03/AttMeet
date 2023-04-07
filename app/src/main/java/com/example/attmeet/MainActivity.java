@@ -81,6 +81,11 @@ public class MainActivity extends AppCompatActivity {
 //    intent.putExtra("College_name",getIntent().getStringExtra("College_name"));
                         startActivity(intent);
                     }
+                    else if (model.getStudentName()!=null) {
+                        Intent intent=new Intent(MainActivity.this,Student_Dashboard.class);
+//    intent.putExtra("College_name",getIntent().getStringExtra("College_name"));
+                        startActivity(intent);
+                    }
 
 
                 }

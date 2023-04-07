@@ -4,6 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/rounded_file"
+    android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
+
     >
 
 <TextView

@@ -2,6 +2,37 @@ package com.example.attmeet;
 
 public class Student_Model {
     String StudentId,StudentName,Studentyear,StudentEmail,StudentPassword,StudentStream,StudentUid;
+    String Subject,TeacherId,TeacherName;
+
+    public Student_Model(String subject, String teacherId, String teacherName) {
+        Subject = subject;
+        TeacherId = teacherId;
+        TeacherName = teacherName;
+    }
+
+    public String getSubject() {
+        return Subject;
+    }
+
+    public void setSubject(String subject) {
+        Subject = subject;
+    }
+
+    public String getTeacherId() {
+        return TeacherId;
+    }
+
+    public void setTeacherId(String teacherId) {
+        TeacherId = teacherId;
+    }
+
+    public String getTeacherName() {
+        return TeacherName;
+    }
+
+    public void setTeacherName(String teacherName) {
+        TeacherName = teacherName;
+    }
 
     public Student_Model() {
     }

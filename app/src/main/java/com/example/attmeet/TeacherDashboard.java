@@ -45,7 +45,7 @@ DatabaseReference reference;
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
         navigationView=findViewById(R.id.TeacherNavigationView);
-        ImageSlider slider=findViewById(R.id.imageslider);
+        ImageSlider slider=findViewById(R.id.imagesliderTeacher);
         List<SlideModel> list=new ArrayList<>();
         list.add(new SlideModel(R.drawable.logo_main));
         list.add(new SlideModel("https://picsum.photos/id/237/200/300"));

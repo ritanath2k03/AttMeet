@@ -16,8 +16,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AttMeet">
         <activity
-            android:name=".Student_Dashboard"
+            android:name=".StudentSchedule"
             android:exported="false" />
+        <activity
+            android:name=".Student_Dashboard"
+            android:exported="false"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"/>
         <activity
             android:name=".StudentEnroll"
             android:exported="false" />
