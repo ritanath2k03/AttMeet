@@ -1,5 +1,6 @@
 package com.example.attmeet;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
@@ -26,6 +27,13 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 public class MainActivity extends AppCompatActivity {
     private TextView textView,textView1;
     private Handler handler,handler1;
@@ -37,6 +45,9 @@ public class MainActivity extends AppCompatActivity {
 
     private int endTime = 0;
     private Button login_btn,signin_btn;
+    FirebaseDatabase db=FirebaseDatabase.getInstance();
+    DatabaseReference reference;
+    FirebaseAuth auth=FirebaseAuth.getInstance();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,7 +63,41 @@ public class MainActivity extends AppCompatActivity {
         signin_btn=findViewById(R.id.signin);
 
         textView1 = (TextView) findViewById(R.id.Welcome_word2);
-        textView1.setText("EDU MEET ");
+        textView1.setText("ATT MEET ");
+
+        if(auth.getUid()!=null){
+            reference=db.getReference("Users").child(auth.getUid());
+            reference.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    Authentication_model model=snapshot.getValue(Authentication_model.class);
+                    if(model.getTeacherName()!=null){
+                        Intent intent=new Intent(MainActivity.this,TeacherDashboard.class);
+//    intent.putExtra("College_name",getIntent().getStringExtra("College_name"));
+                        startActivity(intent);
+                    }
+                    else if (model.getName()!=null) {
+                        Intent intent=new Intent(MainActivity.this,Administration.class);
+//    intent.putExtra("College_name",getIntent().getStringExtra("College_name"));
+                        startActivity(intent);
+                    }
+                    else if (model.getStudentName()!=null) {
+                        Intent intent=new Intent(MainActivity.this,Student_Dashboard.class);
+//    intent.putExtra("College_name",getIntent().getStringExtra("College_name"));
+                        startActivity(intent);
+                    }
+
+
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+        }
+
+
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -118,6 +163,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void show() {
+
+
+
 signin_btn.setVisibility(View.VISIBLE);
 login_btn.setVisibility(View.VISIBLE);
         Dialog dialog=new Dialog(this);

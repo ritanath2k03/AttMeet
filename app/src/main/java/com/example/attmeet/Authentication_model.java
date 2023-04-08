@@ -3,14 +3,138 @@ package com.example.attmeet;
 import java.util.Objects;
 
 public class Authentication_model {
-String University;
-    String College;
+    String University;
+    String Colleges;
     String Stream;
     String Year;
     String Roll;
     String Name;
- String Password;
-  String Email;
+    String Password;
+    String Email;
+    String CollegeId;
+    String Uid;
+String TeacherEmail,TeacherId,TeacherName,TeacherPassword,TeacherSubject;
+String StudentEmail,StudentId,StudentName,StudentPassword,StudentStream,StudentUid,Studentyear;
+
+    public void setColleges(String colleges) {
+        Colleges = colleges;
+    }
+
+    public String getStudentEmail() {
+        return StudentEmail;
+    }
+
+    public void setStudentEmail(String studentEmail) {
+        StudentEmail = studentEmail;
+    }
+
+    public String getStudentId() {
+        return StudentId;
+    }
+
+    public void setStudentId(String studentId) {
+        StudentId = studentId;
+    }
+
+    public String getStudentName() {
+        return StudentName;
+    }
+
+    public void setStudentName(String studentName) {
+        StudentName = studentName;
+    }
+
+    public String getStudentPassword() {
+        return StudentPassword;
+    }
+
+    public void setStudentPassword(String studentPassword) {
+        StudentPassword = studentPassword;
+    }
+
+    public String getStudentStream() {
+        return StudentStream;
+    }
+
+    public void setStudentStream(String studentStream) {
+        StudentStream = studentStream;
+    }
+
+    public String getStudentUid() {
+        return StudentUid;
+    }
+
+    public void setStudentUid(String studentUid) {
+        StudentUid = studentUid;
+    }
+
+    public String getStudentyear() {
+        return Studentyear;
+    }
+
+    public void setStudentyear(String studentyear) {
+        Studentyear = studentyear;
+    }
+
+    public String getTeacherEmail() {
+        return TeacherEmail;
+    }
+
+    public void setTeacherEmail(String teacherEmail) {
+        TeacherEmail = teacherEmail;
+    }
+
+    public String getTeacherId() {
+        return TeacherId;
+    }
+
+    public void setTeacherId(String teacherId) {
+        TeacherId = teacherId;
+    }
+
+    public String getTeacherName() {
+        return TeacherName;
+    }
+
+    public void setTeacherName(String teacherName) {
+        TeacherName = teacherName;
+    }
+
+    public String getTeacherPassword() {
+        return TeacherPassword;
+    }
+
+    public void setTeacherPassword(String teacherPassword) {
+        TeacherPassword = teacherPassword;
+    }
+
+    public String getTeacherSubject() {
+        return TeacherSubject;
+    }
+
+    public void setTeacherSubject(String teacherSubject) {
+        TeacherSubject = teacherSubject;
+    }
+
+    public String getCollegeId() {
+        return CollegeId;
+    }
+
+    public void setCollegeId(String collegeId) {
+        CollegeId = collegeId;
+    }
+
+    public String getUid() {
+        return Uid;
+    }
+
+    public void setUid(String uid) {
+        Uid = uid;
+    }
+
+    public Authentication_model(String colleges) {
+        Colleges = colleges;
+    }
 
     public Authentication_model() {
 
@@ -39,12 +163,12 @@ String University;
         University = university;
     }
 
-    public String getCollege() {
-        return College;
+    public String getColleges() {
+        return Colleges;
     }
 
     public void setCollege(String college) {
-        College = college;
+        Colleges = college;
     }
 
     public String getStream() {
@@ -98,4 +222,6 @@ String University;
     public int hashCode() {
         return Objects.hash(getEmail(),getPassword());
     }
+
 }
+

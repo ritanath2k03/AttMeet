@@ -15,6 +15,13 @@ import java.util.ArrayList;
 public class Authentication_adapter extends RecyclerView.Adapter<Authentication_adapter.ViewHolder> {
     ArrayList<Authentication_model> arrayList;
     Login context;
+Administration context1;
+    public Authentication_adapter(ArrayList<Authentication_model> arrayList, Administration administrationContext) {
+        this.arrayList = arrayList;
+        this.administrationContext = administrationContext;
+    }
+
+    Administration administrationContext;
 
     public Authentication_adapter(ArrayList<Authentication_model> arrayList, Login context) {
         this.arrayList = arrayList;
@@ -24,15 +31,14 @@ public class Authentication_adapter extends RecyclerView.Adapter<Authentication_
     @NonNull
     @Override
     public Authentication_adapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view= LayoutInflater.from(context).inflate(R.layout.each_admin_list,parent,false);
+        View view= LayoutInflater.from(context1).inflate(R.layout.activity_administration,parent,false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull Authentication_adapter.ViewHolder holder, int position) {
 Authentication_model model=arrayList.get(position);
-holder.Password.setText(model.getPassword());
-holder.Email.setText(model.getEmail());
+holder.College_name.setText(model.getName());
     }
 
     @Override
@@ -41,11 +47,10 @@ holder.Email.setText(model.getEmail());
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-          TextView Password,Email;
+          TextView College_name;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            Password=itemView.findViewById(R.id.Password);
-            Email=itemView.findViewById(R.id.Email);
+            College_name=itemView.findViewById(R.id.Teacher_text);
         }
     }
 }
