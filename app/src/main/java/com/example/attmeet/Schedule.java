@@ -158,15 +158,6 @@ int i=0;
         JitsiMeetActivity jitsiMeetActivity=new JitsiMeetActivity();
         jitsiMeetActivity.leave();
 
-        IntentFilter intentFilter=new IntentFilter();
-        intentFilter.addAction(BroadcastEvent.Type.CONFERENCE_JOINED.getAction());
-        BroadcastReceiver broadcastReceiver=new BroadcastReceiver() {
-            @Override
-            public void onReceive(Context context, Intent intent) {
-                Toast.makeText(Schedule.this, "Received", Toast.LENGTH_SHORT).show();
-            }
-        };
-        LocalBroadcastManager.getInstance(this).registerReceiver(broadcastReceiver,intentFilter);
 
     }
 

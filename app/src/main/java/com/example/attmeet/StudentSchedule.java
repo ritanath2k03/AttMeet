@@ -14,12 +14,16 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.GridLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.denzcoskun.imageslider.ImageSlider;
 import com.denzcoskun.imageslider.models.SlideModel;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -29,8 +33,11 @@ import com.google.firebase.database.ValueEventListener;
 
 import org.jitsi.meet.sdk.BroadcastEvent;
 import org.jitsi.meet.sdk.JitsiMeetActivity;
+import org.jitsi.meet.sdk.JitsiMeetConferenceOptions;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class StudentSchedule extends AppCompatActivity {
@@ -41,7 +48,7 @@ public class StudentSchedule extends AppCompatActivity {
     TextView headername;
     StudentScheduelAdapter adapter_m,adapter_t,adapter_w,adapter_th,adapter_f;
     RecyclerView recyclerView_m,recyclerView_t,recyclerView_w,recyclerView_th,recyclerView_f;
-
+String m_start="0.0",m_End="0.0";
     ArrayList<Student_Model> arrayList_m,arrayList_t,arrayList_w,arrayList_th,arrayList_f;
     @SuppressLint("MissingInflatedId")
     @Override
@@ -57,15 +64,9 @@ public class StudentSchedule extends AppCompatActivity {
 
 
 
-        IntentFilter intentFilter1=new IntentFilter();
-        intentFilter1.addAction(BroadcastEvent.Type.CONFERENCE_TERMINATED.getAction());
-        BroadcastReceiver broadcastReceiver1=new BroadcastReceiver() {
-            @Override
-            public void onReceive(Context context, Intent intent) {
-                Toast.makeText(StudentSchedule.this, "Terminated", Toast.LENGTH_SHORT).show();
-            }
-        };
-        LocalBroadcastManager.getInstance(this).registerReceiver(broadcastReceiver1,intentFilter1);
+m_start="0.0";
+m_End="0.0";
+
 
 
 
@@ -211,10 +212,19 @@ public class StudentSchedule extends AppCompatActivity {
     @Override
     protected void onRestart() {
         super.onRestart();
-JitsiMeetActivity jitsiMeetActivity=new JitsiMeetActivity();
+        Date date;
+        SimpleDateFormat formatdate;
+
+String subject,m_end;
+AttendanceCheck attendanceCheck=new AttendanceCheck();
+subject=attendanceCheck.subject;
+m_end=attendanceCheck.m_end;
+        date=new Date();
+        formatdate=new SimpleDateFormat("hh:mm:ss  DD/MM/YYYY");
 
 
-jitsiMeetActivity.leave();
+
+
 
     }
 
@@ -222,14 +232,16 @@ jitsiMeetActivity.leave();
     protected void onDestroy() {
         super.onDestroy();
         JitsiMeetActivity jitsiMeetActivity=new JitsiMeetActivity();
-       jitsiMeetActivity.leave();
+
 
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        Toast.makeText(this, "On Stop", Toast.LENGTH_SHORT).show();
 
     }
+
+
+
 }

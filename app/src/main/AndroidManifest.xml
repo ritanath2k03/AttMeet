@@ -16,12 +16,27 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AttMeet">
         <activity
-            android:name=".StudentSchedule"
+            android:name=".AttendanceCheck"
             android:exported="false" />
+        <activity
+            android:name=".StudentSchedule"
+            android:configChanges="keyboard|orientation"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:scheme="AIzaSyDvlhcAd7xafVw2ftN52tKZtgUcE6t7ny8"
+                    tools:ignore="AppLinkUrlError" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".Student_Dashboard"
             android:exported="false"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"/>
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
         <activity
             android:name=".StudentEnroll"
             android:exported="false" />

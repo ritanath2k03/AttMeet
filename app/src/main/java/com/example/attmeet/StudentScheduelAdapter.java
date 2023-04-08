@@ -28,18 +28,20 @@ import org.jitsi.meet.sdk.BroadcastEvent;
 import org.jitsi.meet.sdk.JitsiMeetActivity;
 import org.jitsi.meet.sdk.JitsiMeetConferenceOptions;
 import org.jitsi.meet.sdk.JitsiMeetUserInfo;
+import org.jitsi.meet.sdk.JitsiMeetView;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 
 public class StudentScheduelAdapter extends RecyclerView.Adapter<StudentScheduelAdapter.ViewHoldar> {
     ArrayList<Student_Model> arrayList;
-
 FirebaseAuth auth=FirebaseAuth.getInstance();
 FirebaseDatabase db=FirebaseDatabase.getInstance();
-DatabaseReference reference=db.getReference("Users").child(auth.getUid()).child("Attendance").child("24:03:2024").child("Time");
+Date  date=new Date();
 
     StudentSchedule context;
 
@@ -61,43 +63,20 @@ holder.Teacher.setText(model.getTeacherName());
 holder.Subject.setText(model.getSubject());
 
 
+
 holder.itemView.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View view) {
 
+        Intent intent=new Intent(context,AttendanceCheck.class);
+        intent.putExtra("SubjectName",model.getSubject());
+        intent.putExtra("TeacherIdformeet",model.getTeacherId());
+        context.startActivity(intent);
 
-        JitsiMeetConferenceOptions options = new JitsiMeetConferenceOptions.Builder()
-                .setRoom(model.getTeacherId())
-                .build();
-        JitsiMeetActivity.launch(context,options);
-
-
-
-        IntentFilter intentFilter=new IntentFilter();
-        intentFilter.addAction(BroadcastEvent.Type.CONFERENCE_JOINED.getAction());
-
-        BroadcastReceiver broadcastReceiver=new BroadcastReceiver() {
-            @Override
-            public void onReceive(Context context, Intent intent) {
-
-            }
-        };
-        LocalBroadcastManager.getInstance(context).registerReceiver(broadcastReceiver,intentFilter);
-
-        IntentFilter intentFilter1=new IntentFilter();
-        intentFilter1.addAction(BroadcastEvent.Type.CONFERENCE_TERMINATED.getAction());
-
-
-        BroadcastReceiver broadcastReceiver1=new BroadcastReceiver() {
-            @Override
-            public void onReceive(Context context, Intent intent) {
-
-                
-            }
-        };
-        LocalBroadcastManager.getInstance(context).registerReceiver(broadcastReceiver1,intentFilter1);
     }
 });
+
+
 
     }
 
