@@ -13,8 +13,23 @@ public class Authentication_model {
     String Email;
     String CollegeId;
     String Uid;
+    String Subject;
 String TeacherEmail,TeacherId,TeacherName,TeacherPassword,TeacherSubject;
 String StudentEmail,StudentId,StudentName,StudentPassword,StudentStream,StudentUid,Studentyear;
+
+    public Authentication_model(String stream, String collegeId, String subject) {
+        Stream = stream;
+        CollegeId = collegeId;
+        Subject = subject;
+    }
+
+    public String getSubject() {
+        return Subject;
+    }
+
+    public void setSubject(String subject) {
+        Subject = subject;
+    }
 
     public void setColleges(String colleges) {
         Colleges = colleges;

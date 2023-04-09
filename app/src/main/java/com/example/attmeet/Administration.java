@@ -145,11 +145,7 @@ toggle.syncState();
                     toolbar.setTitle(model1.getName());
 
                 }
-
-
             }
-
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
@@ -181,6 +177,24 @@ toggle.syncState();
                         }
                     });
                 }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+ArrayList<String> arrayList = new ArrayList<>();
+        reference.child("Teachers").addValueEventListener(new ValueEventListener() {
+
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                arrayList.add("fsadfdsaf");
+                arrayList.clear();
+                for(DataSnapshot dataSnapshot:snapshot.getChildren()){
+                    arrayList.add(dataSnapshot.getKey());
+                }
+                Toast.makeText(Administration.this, arrayList.toString(), Toast.LENGTH_SHORT).show();
             }
 
             @Override

@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.denzcoskun.imageslider.ImageSlider;
@@ -29,6 +30,7 @@ public class Student_Dashboard extends AppCompatActivity {
     FirebaseDatabase db=FirebaseDatabase.getInstance();
     DatabaseReference databaseReference=db.getReference("Users");
     TextView SName;
+    ImageView logout;
     @SuppressLint("MissingInflatedId")
 
 
@@ -47,6 +49,16 @@ public class Student_Dashboard extends AppCompatActivity {
         slider.setImageList(list,true);
         databaseReference=databaseReference.child(auth.getUid());
         SName=findViewById(R.id.StudentName);
+
+        logout=findViewById(R.id.Logoutbar);
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                auth.signOut();
+                startActivity(new Intent(Student_Dashboard.this,MainActivity.class));
+            }
+        });
+
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {

@@ -15,25 +15,30 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import org.jitsi.meet.sdk.BroadcastEvent;
 import org.jitsi.meet.sdk.JitsiMeetActivity;
 import org.jitsi.meet.sdk.JitsiMeetConferenceOptions;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 
 public class AttendanceCheck extends AppCompatActivity {
     FirebaseAuth auth=FirebaseAuth.getInstance();
     FirebaseDatabase db=FirebaseDatabase.getInstance();
     DatabaseReference reference=db.getReference("Users");
-    Button button,exit;
+    Button button,exit,makeRequest;
     String m_start,m_end;
+    String St_name,St_stream,St_Year,St_Uid;
 
     String subject,teacherId;
     @SuppressLint("MissingInflatedId")
@@ -64,8 +69,7 @@ public class AttendanceCheck extends AppCompatActivity {
                     @Override
                     public void onReceive(Context context, Intent intent) {
 
-////                 studentSchedule.onsend(sub,simpleDateFormat.format(date));
-//                    Toast.makeText(context, sub+simpleDateFormat.format(date), Toast.LENGTH_SHORT).show();
+
 
                         onsend(simpleDateFormat.format(date));
 
@@ -89,14 +93,73 @@ public class AttendanceCheck extends AppCompatActivity {
         };
         LocalBroadcastManager.getInstance(AttendanceCheck.this).registerReceiver(broadcastReceiver1,intentFilter1);
         exit=findViewById(R.id.exitBtn);
+        final long[] diff = new long[1];
         exit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                reference.child(auth.getUid()).child("Attendance").child(subject).child("TerminationTime").setValue(m_end);
+                Date date=new Date();
+                SimpleDateFormat formatdate=new SimpleDateFormat("dd-MM-YYYY");
+
+                String dateString=formatdate.format(date);
+
+                reference.child(auth.getUid()).child("Attendance").child(subject).child(dateString).child("Time").child("TerminationTime").setValue(m_end);
+                SimpleDateFormat sdf=new SimpleDateFormat("hh:mm");
+                try {
+                    Date d1=sdf.parse(m_start);
+                    Date d2=sdf.parse(m_end);
+                    diff[0] =d2.getTime()-d1.getTime();
+                    reference.child(auth.getUid()).child("Attendance").child(subject).child(dateString).child("Time").child("Duration").setValue((diff[0] /(1000*60)));
+
+                } catch (ParseException e) {
+                    throw new RuntimeException(e);
+                }
+
 
             }
         });
 
+makeRequest=findViewById(R.id.MakeRequest);
+reference.child(auth.getUid()).addValueEventListener(new ValueEventListener() {
+    @Override
+    public void onDataChange(@NonNull DataSnapshot snapshot) {
+        Student_Model model=snapshot.getValue(Student_Model.class);
+        St_name=model.getStudentName();
+        St_stream=model.getStudentStream();
+        St_Uid=model.getStudentUid();
+        St_Year=model.getStudentyear();
+    }
+
+    @Override
+    public void onCancelled(@NonNull DatabaseError error) {
+
+    }
+});
+
+makeRequest.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View view) {
+        String duration= String.valueOf((diff[0] /(1000*60)));
+        HashMap<String, Object> map=new HashMap<>();
+        map.put("StudentName",St_name);
+        map.put("StudentUid",St_Uid);
+        map.put("StudentStream",St_stream+St_Year);
+        map.put("Present","False");
+        map.put("Duration",duration);
+        map.put("Subject",subject);
+
+        Date date1=new Date();
+        SimpleDateFormat simpleDateFormat1=new SimpleDateFormat("dd-MM-YYYY");
+        String DateString=simpleDateFormat1.format(date1);
+        map.put("ClassDate",DateString);
+        reference.child(teacherId).child("StudentAttendance").child(St_stream+St_Year).child(DateString).child(St_Uid).setValue(map).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                Toast.makeText(AttendanceCheck.this, "Requested for Attendance", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+    }
+});
 
 
     }
@@ -112,10 +175,10 @@ public class AttendanceCheck extends AppCompatActivity {
     @Override
     protected void onRestart() {
         super.onRestart();
-        Date date;
-       SimpleDateFormat formatdate;
+        Date date1=new Date();
+        SimpleDateFormat simpleDateFormat1=new SimpleDateFormat("dd-MM-YYYY");
 
-        reference.child(auth.getUid()).child("Attendance").child(subject).child("JoinTime").setValue(m_start).addOnCompleteListener(new OnCompleteListener<Void>() {
+        reference.child(auth.getUid()).child("Attendance").child(subject).child(simpleDateFormat1.format(date1)).child("Time").child("JoinTime").setValue(m_start).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
 
@@ -127,7 +190,6 @@ public class AttendanceCheck extends AppCompatActivity {
 
     }
     public void onsend( String Start_time) {
-        Toast.makeText(this, Start_time, Toast.LENGTH_SHORT).show();
         m_start=Start_time;
     }
 
@@ -143,7 +205,6 @@ public class AttendanceCheck extends AppCompatActivity {
         BroadcastReceiver broadcastReceiver1=new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
-                Toast.makeText(AttendanceCheck.this, "Terminated", Toast.LENGTH_SHORT).show();
                 onTerminate(formatdate.format(date));
             }
         };

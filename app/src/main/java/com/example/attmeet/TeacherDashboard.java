@@ -12,6 +12,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.denzcoskun.imageslider.ImageSlider;
@@ -34,6 +36,7 @@ NavigationView navigationView;
 FirebaseAuth auth=FirebaseAuth.getInstance();
 FirebaseDatabase db=FirebaseDatabase.getInstance();
 DatabaseReference reference;
+ImageView Viewschedule,TakeAttendance;
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +58,25 @@ DatabaseReference reference;
         slider.setImageList(list,true);
         reference =db.getReference("Users").child(auth.getUid());
 Log.d("UID",FirebaseAuth.getInstance().getUid());
+
+TakeAttendance=findViewById(R.id.Take_Attendance);
+TakeAttendance.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View view) {
+        startActivity(new Intent(TeacherDashboard.this,StudentAttendance.class));
+    }
+});
+
+Viewschedule=findViewById(R.id.ViewSchedule);
+
+Viewschedule.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View view) {
+        startActivity(new Intent(TeacherDashboard.this,Schedule.class));
+    }
+});
+
+
 reference.addValueEventListener(new ValueEventListener() {
     @Override
     public void onDataChange(@NonNull DataSnapshot snapshot) {

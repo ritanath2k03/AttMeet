@@ -1,495 +1,120 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Schedule"
+    android:orientation="vertical"
+    tools:context=".Schedule">
 
-    style="@style/Theme.AttMeetnoactiondaynight">
-<androidx.appcompat.widget.Toolbar
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:id="@+id/Toolbar"
-    android:background="@color/purple_200"
-    app:menu="@menu/schedulemenu"/>
-
+    <TextView
+        android:id="@+id/header_name_t"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="TeacherName"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
     <LinearLayout
-        android:id="@+id/LeftLayout"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/Toolbar"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="0dp"
-        android:layout_marginBottom="0dp"
         android:orientation="vertical">
 
-        <ImageView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginBottom="10dp"
-            android:src="@drawable/icon_settings" />
+            android:orientation="horizontal">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginBottom="10dp"
-            android:src="@drawable/icon_settings" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="15dp"
+                android:padding="10dp"
+                android:text="Mon" />
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginBottom="10dp"
-            android:src="@drawable/icon_settings" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="15dp"
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginBottom="10dp"
-            android:src="@drawable/icon_settings" />
+                android:padding="12dp"
+                android:text="Tue" />
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginBottom="10dp"
-            android:src="@drawable/icon_settings" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="15dp"
+                android:padding="12dp"
+                android:text="Wed" />
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginBottom="10dp"
-            android:src="@drawable/icon_settings" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="15dp"
+                android:padding="12dp"
+                android:text="Thu" />
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginBottom="10dp"
-            android:src="@drawable/icon_settings" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="11dp"
+                android:padding="12dp"
+                android:text="Fri" />
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginBottom="10dp"
-            android:src="@drawable/icon_settings" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/Monday_t"
+                android:layout_margin="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:padding="10dp"
+
+                />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/Tuesday_t"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_margin="10dp"
+                android:paddingTop="10dp"
+                />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/Wednesday_t"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_margin="10dp"
+                android:padding="10dp"
+
+                />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/Thursday_t"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_margin="10dp"
+                android:padding="10dp"
+                />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/Friday_t"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_margin="10dp"
+
+                android:padding="10dp"
+                />
+
+        </LinearLayout>
 
 
     </LinearLayout>
 
-   <ScrollView
-       android:layout_width="match_parent"
-       android:layout_height="match_parent"
-       android:layout_below="@+id/Toolbar"
-
-       android:layout_marginStart="0dp"
-       android:layout_marginTop="0dp"
-       android:layout_toEndOf="@+id/LeftLayout">
-     <LinearLayout
-         android:layout_width="match_parent"
-         android:layout_height="match_parent"
-         android:orientation="vertical">
-         <TextView
-             android:layout_width="match_parent"
-             android:layout_height="wrap_content"
-             android:text="CSE"
-             android:textSize="20dp"
-             android:gravity="center"
-             android:textStyle="bold"/>
-
-       <LinearLayout
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-
-           android:orientation="horizontal">
-
-           <GridLayout
-               android:layout_width="match_parent"
-               android:layout_height="match_parent"
-               android:columnCount="2"
-               android:rowCount="10"
-               android:paddingTop="10dp">
-
-               <LinearLayout android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:orientation="vertical">
-                   <ImageView
-                       android:layout_width="150dp"
-                       android:layout_height="100dp"
-                       android:src="@drawable/logo_main"
-                       android:id="@+id/subject"
-                       />
-                   <TextView
-                       android:layout_width="match_parent"
-                       android:layout_height="match_parent"
-                       android:text="CSE-A 2ndyear"
-                       android:gravity="center"
-                       android:layout_marginBottom="5dp"
-                       android:layout_marginTop="5dp"/>
-               </LinearLayout>
-               <LinearLayout android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:orientation="vertical">
-                   <ImageView
-                       android:layout_width="150dp"
-                       android:layout_height="100dp"
-                       android:src="@drawable/logo_main"
-                       />
-                   <TextView
-                       android:layout_width="match_parent"
-                       android:layout_height="match_parent"
-                       android:text="CSE-A 2ndyear"
-                       android:gravity="center"
-                       android:layout_marginBottom="5dp"
-                       android:layout_marginTop="5dp"/>
-               </LinearLayout>
-               <LinearLayout android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:orientation="vertical">
-                   <ImageView
-                       android:layout_width="150dp"
-                       android:layout_height="100dp"
-                       android:src="@drawable/logo_main"
-                       />
-                   <TextView
-                       android:layout_width="match_parent"
-                       android:layout_height="match_parent"
-                       android:text="CSE-A 2ndyear"
-                       android:gravity="center"
-                       android:layout_marginBottom="5dp"
-                       android:layout_marginTop="5dp"/>
-               </LinearLayout>
-               <LinearLayout android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:orientation="vertical">
-                   <ImageView
-                       android:layout_width="150dp"
-                       android:layout_height="100dp"
-                       android:src="@drawable/logo_main"
-                       />
-                   <TextView
-                       android:layout_width="match_parent"
-                       android:layout_height="match_parent"
-                       android:text="CSE-A 2ndyear"
-                       android:gravity="center"
-                       android:layout_marginBottom="5dp"
-                       android:layout_marginTop="5dp"/>
-               </LinearLayout>
-               <LinearLayout android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:orientation="vertical">
-                   <ImageView
-                       android:layout_width="150dp"
-                       android:layout_height="100dp"
-                       android:src="@drawable/logo_main"
-                       />
-                   <TextView
-                       android:layout_width="match_parent"
-                       android:layout_height="match_parent"
-                       android:text="CSE-A 2ndyear"
-                       android:gravity="center"
-                       android:layout_marginBottom="5dp"
-                       android:layout_marginTop="5dp"/>
-               </LinearLayout>
-               <LinearLayout android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:orientation="vertical">
-                   <ImageView
-                       android:layout_width="150dp"
-                       android:layout_height="100dp"
-                       android:src="@drawable/logo_main"
-                       />
-                   <TextView
-                       android:layout_width="match_parent"
-                       android:layout_height="match_parent"
-                       android:text="CSE-A 2ndyear"
-                       android:gravity="center"
-                       android:layout_marginBottom="5dp"
-                       android:layout_marginTop="5dp"/>
-               </LinearLayout>
 
 
 
-
-
-
-           </GridLayout>
-       </LinearLayout>
-         <TextView
-             android:layout_width="match_parent"
-             android:layout_height="wrap_content"
-             android:text="IT"
-             android:textSize="20dp"
-
-             android:gravity="center"
-             android:textStyle="bold"/>
-
-         <LinearLayout
-             android:layout_width="match_parent"
-             android:layout_height="wrap_content"
-
-             android:orientation="horizontal">
-
-             <GridLayout
-                 android:layout_width="match_parent"
-                 android:layout_height="match_parent"
-                 android:columnCount="2"
-                 android:rowCount="10"
-                 android:paddingTop="10dp">
-
-                 <LinearLayout android:layout_width="wrap_content"
-                     android:layout_height="wrap_content"
-                     android:orientation="vertical">
-                     <ImageView
-                         android:layout_width="150dp"
-                         android:layout_height="100dp"
-                         android:src="@drawable/logo_main"
-                         />
-                     <TextView
-                         android:layout_width="match_parent"
-                         android:layout_height="match_parent"
-                         android:text="CSE-A 2ndyear"
-                         android:gravity="center"
-                         android:layout_marginBottom="5dp"
-                         android:layout_marginTop="5dp"/>
-                 </LinearLayout>
-                 <LinearLayout android:layout_width="wrap_content"
-                     android:layout_height="wrap_content"
-                     android:orientation="vertical">
-                     <ImageView
-                         android:layout_width="150dp"
-                         android:layout_height="100dp"
-                         android:src="@drawable/logo_main"
-                         />
-                     <TextView
-                         android:layout_width="match_parent"
-                         android:layout_height="match_parent"
-                         android:text="CSE-A 2ndyear"
-                         android:gravity="center"
-                         android:layout_marginBottom="5dp"
-                         android:layout_marginTop="5dp"/>
-                 </LinearLayout>
-                 <LinearLayout android:layout_width="wrap_content"
-                     android:layout_height="wrap_content"
-                     android:orientation="vertical">
-                     <ImageView
-                         android:layout_width="150dp"
-                         android:layout_height="100dp"
-                         android:src="@drawable/logo_main"
-                         />
-                     <TextView
-                         android:layout_width="match_parent"
-                         android:layout_height="match_parent"
-                         android:text="CSE-A 2ndyear"
-                         android:gravity="center"
-                         android:layout_marginBottom="5dp"
-                         android:layout_marginTop="5dp"/>
-                 </LinearLayout>
-                 <LinearLayout android:layout_width="wrap_content"
-                     android:layout_height="wrap_content"
-                     android:orientation="vertical">
-                     <ImageView
-                         android:layout_width="150dp"
-                         android:layout_height="100dp"
-                         android:src="@drawable/logo_main"
-                         />
-                     <TextView
-                         android:layout_width="match_parent"
-                         android:layout_height="match_parent"
-                         android:text="CSE-A 2ndyear"
-                         android:gravity="center"
-                         android:layout_marginBottom="5dp"
-                         android:layout_marginTop="5dp"/>
-                 </LinearLayout>
-                 <LinearLayout android:layout_width="wrap_content"
-                     android:layout_height="wrap_content"
-                     android:orientation="vertical">
-                     <ImageView
-                         android:layout_width="150dp"
-                         android:layout_height="100dp"
-                         android:src="@drawable/logo_main"
-                         />
-                     <TextView
-                         android:layout_width="match_parent"
-                         android:layout_height="match_parent"
-                         android:text="CSE-A 2ndyear"
-                         android:gravity="center"
-                         android:layout_marginBottom="5dp"
-                         android:layout_marginTop="5dp"/>
-                 </LinearLayout>
-                 <LinearLayout android:layout_width="wrap_content"
-                     android:layout_height="wrap_content"
-                     android:orientation="vertical">
-                     <ImageView
-                         android:layout_width="150dp"
-                         android:layout_height="100dp"
-                         android:src="@drawable/logo_main"
-                         />
-                     <TextView
-                         android:layout_width="match_parent"
-                         android:layout_height="match_parent"
-                         android:text="CSE-A 2ndyear"
-                         android:gravity="center"
-                         android:layout_marginBottom="5dp"
-                         android:layout_marginTop="5dp"/>
-                 </LinearLayout>
-
-
-
-
-
-
-             </GridLayout>
-         </LinearLayout>
-         <TextView
-             android:layout_width="match_parent"
-             android:layout_height="wrap_content"
-             android:text="ECE"
-             android:textSize="20dp"
-             android:gravity="center"
-             android:textStyle="bold"/>
-
-         <LinearLayout
-             android:layout_width="match_parent"
-             android:layout_height="wrap_content"
-
-             android:orientation="horizontal">
-
-             <GridLayout
-                 android:layout_width="match_parent"
-                 android:layout_height="match_parent"
-                 android:columnCount="2"
-                 android:rowCount="10"
-                 android:paddingTop="10dp">
-
-                 <LinearLayout android:layout_width="wrap_content"
-                     android:layout_height="wrap_content"
-                     android:orientation="vertical">
-                     <ImageView
-                         android:layout_width="150dp"
-                         android:layout_height="100dp"
-                         android:src="@drawable/logo_main"
-                         />
-                     <TextView
-                         android:layout_width="match_parent"
-                         android:layout_height="match_parent"
-                         android:text="CSE-A 2ndyear"
-                         android:gravity="center"
-                         android:layout_marginBottom="5dp"
-                         android:layout_marginTop="5dp"/>
-                 </LinearLayout>
-                 <LinearLayout android:layout_width="wrap_content"
-                     android:layout_height="wrap_content"
-                     android:orientation="vertical">
-                     <ImageView
-                         android:layout_width="150dp"
-                         android:layout_height="100dp"
-                         android:src="@drawable/logo_main"
-                         />
-                     <TextView
-                         android:layout_width="match_parent"
-                         android:layout_height="match_parent"
-                         android:text="CSE-A 2ndyear"
-                         android:gravity="center"
-                         android:layout_marginBottom="5dp"
-                         android:layout_marginTop="5dp"/>
-                 </LinearLayout>
-                 <LinearLayout android:layout_width="wrap_content"
-                     android:layout_height="wrap_content"
-                     android:orientation="vertical">
-                     <ImageView
-                         android:layout_width="150dp"
-                         android:layout_height="100dp"
-                         android:src="@drawable/logo_main"
-                         />
-                     <TextView
-                         android:layout_width="match_parent"
-                         android:layout_height="match_parent"
-                         android:text="CSE-A 2ndyear"
-                         android:gravity="center"
-                         android:layout_marginBottom="5dp"
-                         android:layout_marginTop="5dp"/>
-                 </LinearLayout>
-                 <LinearLayout android:layout_width="wrap_content"
-                     android:layout_height="wrap_content"
-                     android:orientation="vertical">
-                     <ImageView
-                         android:layout_width="150dp"
-                         android:layout_height="100dp"
-                         android:src="@drawable/logo_main"
-                         />
-                     <TextView
-                         android:layout_width="match_parent"
-                         android:layout_height="match_parent"
-                         android:text="CSE-A 2ndyear"
-                         android:gravity="center"
-                         android:layout_marginBottom="5dp"
-                         android:layout_marginTop="5dp"/>
-                 </LinearLayout>
-                 <LinearLayout android:layout_width="wrap_content"
-                     android:layout_height="wrap_content"
-                     android:orientation="vertical">
-                     <ImageView
-                         android:layout_width="150dp"
-                         android:layout_height="100dp"
-                         android:src="@drawable/logo_main"
-                         />
-                     <TextView
-                         android:layout_width="match_parent"
-                         android:layout_height="match_parent"
-                         android:text="CSE-A 2ndyear"
-                         android:gravity="center"
-                         android:layout_marginBottom="5dp"
-                         android:layout_marginTop="5dp"/>
-                 </LinearLayout>
-                 <LinearLayout android:layout_width="wrap_content"
-                     android:layout_height="wrap_content"
-                     android:orientation="vertical">
-                     <ImageView
-                         android:layout_width="150dp"
-                         android:layout_height="100dp"
-                         android:src="@drawable/logo_main"
-                         />
-                     <TextView
-                         android:layout_width="match_parent"
-                         android:layout_height="match_parent"
-                         android:text="CSE-A 2ndyear"
-                         android:gravity="center"
-                         android:layout_marginBottom="5dp"
-                         android:layout_marginTop="5dp"/>
-                 </LinearLayout>
-
-
-
-
-
-
-             </GridLayout>
-         </LinearLayout>
-     </LinearLayout>
-   </ScrollView>
-</RelativeLayout>
+</LinearLayout>

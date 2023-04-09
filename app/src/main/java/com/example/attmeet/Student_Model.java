@@ -4,6 +4,44 @@ public class Student_Model {
     String StudentId,StudentName,Studentyear,StudentEmail,StudentPassword,StudentStream,StudentUid;
     String Subject,TeacherId,TeacherName;
 
+
+
+    String Present;
+    String Duration,ClassDate;
+
+    public Student_Model(String studentName, String studentyear, String studentStream, String studentUid, String duration, String present) {
+        StudentName = studentName;
+        Studentyear = studentyear;
+        StudentStream = studentStream;
+        StudentUid = studentUid;
+        Duration = duration;
+        Present = present;
+    }
+
+    public String getClassDate() {
+        return ClassDate;
+    }
+
+    public void setClassDate(String classDate) {
+        ClassDate = classDate;
+    }
+
+    public String getDuration() {
+        return Duration;
+    }
+
+    public void setDuration(String duration) {
+        Duration = duration;
+    }
+
+    public String getPresent() {
+        return Present;
+    }
+
+    public void setPresent(String present) {
+        Present = present;
+    }
+
     public Student_Model(String subject, String teacherId, String teacherName) {
         Subject = subject;
         TeacherId = teacherId;
