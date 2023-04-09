@@ -212,20 +212,6 @@ m_End="0.0";
     @Override
     protected void onRestart() {
         super.onRestart();
-        Date date;
-        SimpleDateFormat formatdate;
-
-String subject,m_end;
-AttendanceCheck attendanceCheck=new AttendanceCheck();
-subject=attendanceCheck.subject;
-m_end=attendanceCheck.m_end;
-        date=new Date();
-        formatdate=new SimpleDateFormat("hh:mm:ss  DD/MM/YYYY");
-
-
-
-
-
     }
 
     @Override

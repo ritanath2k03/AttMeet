@@ -1,5 +1,6 @@
 package com.example.attmeet;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,10 +16,11 @@ import java.util.ArrayList;
 public class Authentication_adapter extends RecyclerView.Adapter<Authentication_adapter.ViewHolder> {
     ArrayList<Authentication_model> arrayList;
     Login context;
-Administration context1;
-    public Authentication_adapter(ArrayList<Authentication_model> arrayList, Administration administrationContext) {
+Schedule contextSchedule;
+
+    public Authentication_adapter(ArrayList<Authentication_model> arrayList, Schedule contextSchedule) {
         this.arrayList = arrayList;
-        this.administrationContext = administrationContext;
+        this.contextSchedule = contextSchedule;
     }
 
     Administration administrationContext;
@@ -31,14 +33,26 @@ Administration context1;
     @NonNull
     @Override
     public Authentication_adapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view= LayoutInflater.from(context1).inflate(R.layout.activity_administration,parent,false);
+        View view= LayoutInflater.from(contextSchedule).inflate(R.layout.student_each_day,parent,false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull Authentication_adapter.ViewHolder holder, int position) {
 Authentication_model model=arrayList.get(position);
-holder.College_name.setText(model.getName());
+holder.Stream.setText(model.getStream());
+holder.Subject.setText(model.getSubject());
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+              Intent intent= new Intent(contextSchedule, TeacherMeetJoin.class);
+                intent.putExtra("SubjectName",model.getSubject());
+              intent.putExtra("TeacherIdformeet",model.getTeacherId());
+                contextSchedule.startActivity(intent);
+
+            }
+        });
     }
 
     @Override
@@ -47,10 +61,12 @@ holder.College_name.setText(model.getName());
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-          TextView College_name;
+          TextView Stream,Subject;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            College_name=itemView.findViewById(R.id.Teacher_text);
+            Stream=itemView.findViewById(R.id.Teachereachday);
+            Subject=itemView.findViewById(R.id.sub);
+
         }
     }
 }

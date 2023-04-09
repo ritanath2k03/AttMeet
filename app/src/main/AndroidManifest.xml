@@ -16,7 +16,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AttMeet">
         <activity
+            android:name=".StudentAttendance"
+            android:exported="false" />
+        <activity
             android:name=".AttendanceCheck"
+            android:exported="false" />
+        <activity
+            android:name=".TeacherMeetJoin"
             android:exported="false" />
         <activity
             android:name=".StudentSchedule"
