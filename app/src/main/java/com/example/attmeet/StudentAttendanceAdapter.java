@@ -1,5 +1,7 @@
 package com.example.attmeet;
 
+import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,43 +49,44 @@ DatabaseReference reference=db.getReference("Users");
 Student_Model model=arrayList.get(position);
 holder.eStudentView.setText(model.getStudentName());
 holder.Timeduration.setText(model.getDuration());
-
-holder.MakePresent.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View view) {
         HashMap<String,Object> map=new HashMap<>();
         map.put("Present","Present");
+        HashMap<String,Object> map1=new HashMap<>();
+        map1.put("StudentName",model.getStudentName());
+        map1.put("StudentUid",model.getStudentUid());
+        map1.put("StudentYear",model.getStudentyear());
+        map1.put("StudentStream",model.getStudentStream());
+        map1.put("Present","Present");
+        map1.put("Duration",model.getDuration());
+        map1.put("Subject",model.getSubject());
+        String path=model.getStudentStream();
+holder.Makepresent.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View view) {
+
         reference.child(model.getStudentUid()).child("Attendance").child(model.getSubject()).child(model.getClassDate()).child("Time")
                 .setValue(map).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
-
-                        HashMap<String,Object> map1=new HashMap<>();
-                        map1.put("StudentName",model.getStudentName());
-                        map1.put("StudentUid",model.getStudentUid());
-                        map1.put("StudentYear",model.getStudentyear());
-                        map1.put("StudentStream",model.getStudentStream());
-                        map1.put("Present","Present");
-                        map1.put("Duration",model.getDuration());
-                        map1.put("Subject",model.getSubject());
-                        String path=model.getStudentStream();
                         reference.child(auth.getUid()).child("StudentAttendance").child(path).child(model.getClassDate()).child("Present").child(model.getStudentUid())
-                                .setValue(map1).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                .setValue(map1).addOnCompleteListener( new OnCompleteListener<Void>() {
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task) {
-                                        holder.MakeAbsent.invalidate();
                                         Toast.makeText(contex, "Present", Toast.LENGTH_SHORT).show();
+
                                     }
-                                });
+                                })  ;
                     }
-                });
+                })  ;
+
+
 
 
 
     }
 });
 
-        holder.MakeAbsent.setOnClickListener(new View.OnClickListener() {
+holder.MakeAbsent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 HashMap<String,Object> map=new HashMap<>();
@@ -91,8 +94,23 @@ holder.MakePresent.setOnClickListener(new View.OnClickListener() {
                 reference.child(model.getStudentUid()).child("Attendance").child(model.getSubject()).child(model.getClassDate()).child("Time")
                         .setValue(map).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                Toast.makeText(contex,"Absent", Toast.LENGTH_SHORT).show();
+                            public void onComplete(@NonNull Task<Void> task) {HashMap<String,Object> map1=new HashMap<>();
+                                map1.put("StudentName",model.getStudentName());
+                                map1.put("StudentUid",model.getStudentUid());
+                                map1.put("StudentYear",model.getStudentyear());
+                                map1.put("StudentStream",model.getStudentStream());
+                                map1.put("Present","Present");
+                                map1.put("Duration",model.getDuration());
+                                map1.put("Subject",model.getSubject());
+                                String path=model.getStudentStream();
+                                reference.child(auth.getUid()).child("StudentAttendance").child(path).child(model.getClassDate()).child("Absent").child(model.getStudentUid())
+                                        .setValue(map1).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+//
+                                                Toast.makeText(contex, "Absent", Toast.LENGTH_SHORT).show();
+                                            }
+                                        });
                             }
                         });
 
@@ -112,14 +130,14 @@ holder.MakePresent.setOnClickListener(new View.OnClickListener() {
 
     public class ViewHoldar extends RecyclerView.ViewHolder {
         TextView eStudentView,Timeduration;
-        ImageView MakePresent,MakeAbsent;
+        ImageView Makepresent,MakeAbsent;
 
         public ViewHoldar(@NonNull View itemView) {
             super(itemView);
             eStudentView=itemView.findViewById(R.id.eStudentView);
             Timeduration=itemView.findViewById(R.id.Timeduration);
             MakeAbsent=itemView.findViewById(R.id.MakeAbsent);
-            MakePresent=itemView.findViewById(R.id.MakePresent);
+            Makepresent=itemView.findViewById(R.id.MakePresent);
         }
     }
 }

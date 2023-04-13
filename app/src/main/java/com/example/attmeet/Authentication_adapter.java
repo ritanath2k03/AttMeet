@@ -9,7 +9,11 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.core.Context;
+
+import org.jitsi.meet.sdk.JitsiMeetActivity;
+import org.jitsi.meet.sdk.JitsiMeetConferenceOptions;
 
 import java.util.ArrayList;
 
@@ -17,6 +21,7 @@ public class Authentication_adapter extends RecyclerView.Adapter<Authentication_
     ArrayList<Authentication_model> arrayList;
     Login context;
 Schedule contextSchedule;
+FirebaseAuth auth=FirebaseAuth.getInstance();
 
     public Authentication_adapter(ArrayList<Authentication_model> arrayList, Schedule contextSchedule) {
         this.arrayList = arrayList;
@@ -46,13 +51,22 @@ holder.Subject.setText(model.getSubject());
             @Override
             public void onClick(View view) {
 
-              Intent intent= new Intent(contextSchedule, TeacherMeetJoin.class);
-                intent.putExtra("SubjectName",model.getSubject());
-              intent.putExtra("TeacherIdformeet",model.getTeacherId());
-                contextSchedule.startActivity(intent);
+//              Intent intent= new Intent(contextSchedule, TeacherMeetJoin.class);
+//                intent.putExtra("SubjectName",model.getSubject());
+//              intent.putExtra("TeacherIdformeet",model.getTeacherId());
+//                contextSchedule.startActivity(intent);
 
+
+                meet(model.getTeacherId());
             }
         });
+    }
+
+    private void meet(String teacherId) {
+        JitsiMeetConferenceOptions options = new JitsiMeetConferenceOptions.Builder()
+                .setRoom(auth.getUid())
+                .build();
+        JitsiMeetActivity.launch(contextSchedule,options);
     }
 
     @Override

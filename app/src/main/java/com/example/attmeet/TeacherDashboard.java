@@ -42,6 +42,7 @@ ImageView Viewschedule,TakeAttendance;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_teacher_dashboard);
+
         toolbar=findViewById(R.id.Teachertoolbar);
         drawerLayout=findViewById(R.id.TeacherDrawerLayout);
         ActionBarDrawerToggle toggle=new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.navigation_open,R.string.nacigation_colse);
@@ -63,7 +64,10 @@ TakeAttendance=findViewById(R.id.Take_Attendance);
 TakeAttendance.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View view) {
-        startActivity(new Intent(TeacherDashboard.this,StudentAttendance.class));
+       Intent intent=new Intent(TeacherDashboard.this,StudentAttendance.class);
+
+        startActivity(intent);
+
     }
 });
 
@@ -73,6 +77,7 @@ Viewschedule.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View view) {
         startActivity(new Intent(TeacherDashboard.this,Schedule.class));
+
     }
 });
 
@@ -151,7 +156,13 @@ reference.addValueEventListener(new ValueEventListener() {
                 return true;
             }
         });
+
     }
 
 
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
 }

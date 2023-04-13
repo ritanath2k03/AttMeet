@@ -71,6 +71,7 @@ holder.itemView.setOnClickListener(new View.OnClickListener() {
         Intent intent=new Intent(context,AttendanceCheck.class);
         intent.putExtra("SubjectName",model.getSubject());
         intent.putExtra("TeacherIdformeet",model.getTeacherId());
+        intent.putExtra("TeacherNameformeet",model.getTeacherName());
         context.startActivity(intent);
 
     }

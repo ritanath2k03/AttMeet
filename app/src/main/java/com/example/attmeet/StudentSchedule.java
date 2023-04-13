@@ -207,6 +207,7 @@ m_End="0.0";
             }
         });
 
+
     }
 
     @Override
@@ -225,7 +226,8 @@ m_End="0.0";
     @Override
     protected void onStop() {
         super.onStop();
-
+//        Student_Dashboard student_dashboard=new Student_Dashboard();
+//        student_dashboard.onDestroy();
     }
 
 

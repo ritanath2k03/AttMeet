@@ -95,6 +95,7 @@ public class MainActivity extends AppCompatActivity {
 
                 }
             });
+            finish();
         }
 
 
@@ -160,6 +161,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.purple_200)));
+
     }
 
     private void show() {

@@ -107,6 +107,7 @@ Login.setOnClickListener(new View.OnClickListener() {
         startActivity(new Intent(Signin.this,Login.class));
     }
 });
+
     }
 
     private void submit_data_in_Firebase() {

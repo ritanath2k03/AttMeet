@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -24,12 +25,13 @@ import java.util.ArrayList;
 
 public class StudentAttendance extends AppCompatActivity {
 EditText takeStream;
-Button takeattendance,viewAttendance;
+Button takeattendance,viewAttendance, absent;
 EditText takeDate;
 RecyclerView s_list;
-ArrayList<Student_Model > arrayList,arrayList1;
+ArrayList<Student_Model > arrayList,arrayList1,arrayList2;
 StudentAttendanceAdapter adapter;
 AttendanceListAdapter adapter1;
+    AttendanceListAdapter adapter2;
 
 FirebaseDatabase db=FirebaseDatabase.getInstance();
 FirebaseAuth auth=FirebaseAuth.getInstance();
@@ -41,13 +43,14 @@ DatabaseReference reference=db.getReference("Users");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_attendance);
 
+
         takeStream=findViewById(R.id.StreamPicker);
         takeattendance=findViewById(R.id.takeAttendance);
         takeDate=findViewById(R.id.datePicker);
         s_list=findViewById(R.id.sList);
 viewAttendance=findViewById(R.id.ViewAttendance);
 
-
+absent =findViewById(R.id.ViewAbsenTAttendance);
 
 
         takeattendance.setOnClickListener(new View.OnClickListener() {
@@ -120,5 +123,56 @@ viewAttendance=findViewById(R.id.ViewAttendance);
                  }
              }
          });
+        absent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                arrayList1=new ArrayList<>();
+                adapter1=new AttendanceListAdapter(arrayList1,StudentAttendance.this);
+                s_list.setLayoutManager(new LinearLayoutManager(StudentAttendance.this,LinearLayoutManager.VERTICAL,false));
+                s_list.setHasFixedSize(true);
+                s_list.setAdapter(adapter1);
+
+                if(takeDate.getText().toString()!=null&&takeStream.getText().toString()!=null) {
+
+                    reference.child(auth.getUid()).child("StudentAttendance").child(takeStream.getText().toString().toUpperCase()).child(takeDate.getText().toString()).child("Absent").addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            arrayList1.clear();
+                            for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                                Student_Model model = dataSnapshot.getValue(Student_Model.class);
+
+                                arrayList1.add(model);
+                            }
+                            adapter1.notifyDataSetChanged();
+
+
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+
+                }
+            }
+        });
+
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+    }
+
+    @Override
+    public void onBackPressed() {
+
+            super.onBackPressed();
+            Intent intent=new Intent(StudentAttendance.this,TeacherDashboard.class);
+            startActivity(intent);
+
     }
 }

@@ -79,8 +79,10 @@ View.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(android.view.View view) {
         startActivity(new Intent(Student_Dashboard.this,StudentSchedule.class));
+
     }
 });
+
     }
 
     @Override
@@ -88,4 +90,6 @@ View.setOnClickListener(new View.OnClickListener() {
         super.onBackPressed();
 
     }
+
+
 }

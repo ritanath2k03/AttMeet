@@ -12,6 +12,7 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -39,8 +40,9 @@ public class AttendanceCheck extends AppCompatActivity {
     Button button,exit,makeRequest;
     String m_start,m_end;
     String St_name,St_stream,St_Year,St_Uid;
+    TextView tname,tsub;
 
-    String subject,teacherId;
+    String subject,teacherId,teacherName;
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,8 +51,14 @@ public class AttendanceCheck extends AppCompatActivity {
         button=findViewById(R.id.JoinBtn);
         subject=getIntent().getStringExtra("SubjectName");
         teacherId=getIntent().getStringExtra("TeacherIdformeet");
+        teacherName=getIntent().getStringExtra("TeacherNameformeet");
         m_end="0.0";
         m_start="0.0";
+        tname=findViewById(R.id.teachername);
+        tsub=findViewById(R.id.Subjectname);
+        tname.setText(teacherName);
+        tsub.setText(subject);
+
         Date date=new Date();
         SimpleDateFormat simpleDateFormat=new SimpleDateFormat("hh:mm:ss dd/MM/YYYY");
         button.setOnClickListener(new View.OnClickListener() {
@@ -94,6 +102,21 @@ public class AttendanceCheck extends AppCompatActivity {
         LocalBroadcastManager.getInstance(AttendanceCheck.this).registerReceiver(broadcastReceiver1,intentFilter1);
         exit=findViewById(R.id.exitBtn);
         final long[] diff = new long[1];
+        reference.child(auth.getUid()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Student_Model model=snapshot.getValue(Student_Model.class);
+                St_name=model.getStudentName();
+                St_stream=model.getStudentStream();
+                St_Uid=model.getStudentUid();
+                St_Year=model.getStudentyear();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
         exit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -108,8 +131,33 @@ public class AttendanceCheck extends AppCompatActivity {
                     Date d1=sdf.parse(m_start);
                     Date d2=sdf.parse(m_end);
                     diff[0] =d2.getTime()-d1.getTime();
-                    reference.child(auth.getUid()).child("Attendance").child(subject).child(dateString).child("Time").child("Duration").setValue((diff[0] /(1000*60)));
+                    String duration= String.valueOf((diff[0] /(1000*60)));
+                    HashMap<String, Object> map=new HashMap<>();
+                    map.put("StudentName",St_name);
+                    map.put("StudentUid",St_Uid);
+                    map.put("StudentStream",St_stream+St_Year);
+                    map.put("Present","False");
+                    map.put("Duration",duration);
+                    map.put("Subject",subject);
 
+                    Date date1=new Date();
+                    SimpleDateFormat simpleDateFormat1=new SimpleDateFormat("dd-MM-YYYY");
+                    String DateString=simpleDateFormat1.format(date1);
+                    map.put("ClassDate",DateString);
+                    reference.child(auth.getUid()).child("Attendance").child(subject).child(dateString).child("Time").child("Duration").setValue((diff[0] /(1000*60))).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+
+
+                            reference.child(teacherId).child("StudentAttendance").child(St_stream+St_Year).child(DateString).child(St_Uid).setValue(map).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    Toast.makeText(AttendanceCheck.this, "Requested for Attendance", Toast.LENGTH_SHORT).show();
+
+                                }
+                            });
+                        }
+                    });
                 } catch (ParseException e) {
                     throw new RuntimeException(e);
                 }
@@ -118,48 +166,17 @@ public class AttendanceCheck extends AppCompatActivity {
             }
         });
 
-makeRequest=findViewById(R.id.MakeRequest);
-reference.child(auth.getUid()).addValueEventListener(new ValueEventListener() {
-    @Override
-    public void onDataChange(@NonNull DataSnapshot snapshot) {
-        Student_Model model=snapshot.getValue(Student_Model.class);
-        St_name=model.getStudentName();
-        St_stream=model.getStudentStream();
-        St_Uid=model.getStudentUid();
-        St_Year=model.getStudentyear();
-    }
 
-    @Override
-    public void onCancelled(@NonNull DatabaseError error) {
 
-    }
-});
 
-makeRequest.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View view) {
-        String duration= String.valueOf((diff[0] /(1000*60)));
-        HashMap<String, Object> map=new HashMap<>();
-        map.put("StudentName",St_name);
-        map.put("StudentUid",St_Uid);
-        map.put("StudentStream",St_stream+St_Year);
-        map.put("Present","False");
-        map.put("Duration",duration);
-        map.put("Subject",subject);
+//makeRequest.setOnClickListener(new View.OnClickListener() {
+//    @Override
+//    public void onClick(View view) {
+//
+//
+//    }
+//});
 
-        Date date1=new Date();
-        SimpleDateFormat simpleDateFormat1=new SimpleDateFormat("dd-MM-YYYY");
-        String DateString=simpleDateFormat1.format(date1);
-        map.put("ClassDate",DateString);
-        reference.child(teacherId).child("StudentAttendance").child(St_stream+St_Year).child(DateString).child(St_Uid).setValue(map).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                Toast.makeText(AttendanceCheck.this, "Requested for Attendance", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-    }
-});
 
 
     }

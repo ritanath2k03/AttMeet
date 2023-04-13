@@ -42,16 +42,24 @@
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
              android:layout_gravity="left"
-             android:text="Take \nAttendance"
+             android:text="Take\nAttendance"
              android:layout_marginLeft="10dp"
              /><Button
          android:id="@+id/ViewAttendance"
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"
          android:layout_gravity="right"
-         android:text="View \nAttendance"
-         android:layout_marginLeft="35dp"
+         android:text="Present\nList"
+         android:layout_marginLeft="15dp"
          />
+         <Button
+             android:id="@+id/ViewAbsenTAttendance"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_gravity="right"
+             android:text="Absent\nList"
+             android:layout_marginLeft="15dp"
+             />
 
      </LinearLayout>
 
