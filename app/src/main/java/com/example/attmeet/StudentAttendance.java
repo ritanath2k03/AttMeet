@@ -6,12 +6,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -22,11 +24,12 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class StudentAttendance extends AppCompatActivity {
 EditText takeStream;
 Button takeattendance,viewAttendance, absent;
-EditText takeDate;
+TextView takeDate;
 RecyclerView s_list;
 ArrayList<Student_Model > arrayList,arrayList1,arrayList2;
 StudentAttendanceAdapter adapter;
@@ -52,7 +55,7 @@ viewAttendance=findViewById(R.id.ViewAttendance);
 
 absent =findViewById(R.id.ViewAbsenTAttendance);
 
-
+takeDate.setOnClickListener(v->{pickDate();});
         takeattendance.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -159,6 +162,37 @@ absent =findViewById(R.id.ViewAbsenTAttendance);
             }
         });
 
+    }
+
+    private void pickDate() {
+        final Calendar c=Calendar.getInstance();
+        int y=c.get(Calendar.YEAR);
+        int m=c.get(Calendar.MONTH);
+        int d = c.get(Calendar.DAY_OF_MONTH);
+        DatePickerDialog datePickerDialog = new DatePickerDialog(
+                // on below line we are passing context.
+                this,
+                new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year,
+                                          int monthOfYear, int dayOfMonth) {
+                        // on below line we are setting date to our text view.
+
+                        if(dayOfMonth<10)
+                            takeDate.setText("0"+dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
+                         if((monthOfYear + 1)<10)
+                            takeDate.setText(dayOfMonth + "-" +"0"+(monthOfYear + 1) + "-" + year);
+                         if((monthOfYear + 1)<10&&dayOfMonth<10)
+                            takeDate.setText("0"+dayOfMonth + "-" +"0"+(monthOfYear + 1) + "-" + year);
+                        if(dayOfMonth>=10&&monthOfYear>=10) takeDate.setText(dayOfMonth + "-"+(monthOfYear + 1) + "-" + year);
+                    }
+                },
+                // on below line we are passing year,
+                // month and day for selected date in our date picker.
+                y, m, d);
+        // at last we are calling show to
+        // display our date picker dialog.
+        datePickerDialog.show();
     }
 
     @Override

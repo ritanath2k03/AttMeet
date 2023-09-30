@@ -1,0 +1,58 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+CALSCALE:GREGORIAN
+METHOD:REQUEST
+BEGIN:VEVENT
+DTSTART:20230325T033000Z
+DTEND:20230325T103000Z
+DTSTAMP:20230317T161843Z
+ORGANIZER;CN="Flutter Kolkata":MAILTO:calendar-invite@lu.ma
+UID:evt-wuX9nrAImBgC0h3@events.lu.ma
+ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=ACCEPTED;CN=ritana
+ th2003@gmail.com;X-NUM-GUESTS=0:mailto:ritanath2003@gmail.com
+SUMMARY:Flutter Forward Extended, Kolkata
+DESCRIPTION:Get up-to-date information at: https://lu.ma/flutterkolkata?pk=
+ g-lifQg85qemHMmrF\n\nAddress:\nUniversity of Engineering & Management (Priv
+ ate University)\n\nFlutter Forward Extended\nFlutter Forward Extended is a 
+ one-day event in Kolkata on March 25th, dedicated to the open-source framew
+ ork, Flutter. The event will feature talks and workshops from industry expe
+ rts, discussing the latest developments and best practices in Flutter app d
+ evelopment. Attendees will have the opportunity to network with other devel
+ opers, learn about new features and tools, and gain insights into how to us
+ e Flutter to build high-performing, beautiful apps. Whether you're a season
+ ed developer or just getting started with Flutter, this event is a great op
+ portunity to deepen your understanding of the framework and connect with th
+ e community.\nWhy should you join the event?\nFlutter Forward Kolkata is a 
+ chance to meet open-source experts, network with developers, and connect wi
+ th like-minded individuals passionate about Flutter. Attendees can learn, g
+ row, and win cool swag at this amazing event. Whether you're a beginner or 
+ a professional, you'll take away something valuable. Don't miss out!\nWant 
+ to talk at the event?\nAre you a Flutter Enthusiast who wants to share the 
+ experiences of your Flutter development journey or do you want to teach abo
+ ut a particular topic regarding the Flutter Ecosystem? Then, we at, Flutter
+  Kolkata have the perfect opportunity for you.\nHurry Up and submit a Propo
+ sal at https://sessionize.com/flutter-forward-extended-kolkata/\nAgenda of 
+ the event\nTo be updated soon\n\nFor queries, suggestions, or anything else
+ , contact us using the button below\n\nSupport - mailto:flutterkolkata@gmai
+ l.com\n\n\nAbout Community\nFlutter Kolkata\nFlutter Kolkata Community is a
+  passionate and dedicated group of developers and enthusiasts who are commi
+ tted to advancing the world of Flutter and open-source. Through their regul
+ ar meetups, workshops, and events, the community provides a space for devel
+ opers to learn, grow, and connect with like-minded individuals who share th
+ eir passion. The community also works to support local developers and provi
+ de them with the resources they need to succeed in their development work. 
+ Whether you're a beginner or an experienced developer, the Flutter Kolkata 
+ Community is an inclusive and welcoming space where you can expand your kno
+ wledge, network with other developers, and take your first step towards a s
+ uccessful career in open-source development with Flutter.\nRelevant Links t
+ o our socials\n  LinkedIn\n  Twitter\n  Facebook\n  Instagram\n  YouTube\n 
+  Website\n  GitHub\n  WhatsApp Group\n  Telegram Group\n  Meetup
+LOCATION:University of Engineering & Management (Private University), Unive
+ rsity Area, Plot No. III, University Of Engineering & Management, New Town,
+  B/5, New Town Rd, Action Area III, Newtown, Kolkata, West Bengal 700160, I
+ ndia
+GEO:22.559920;88.489901
+SEQUENCE:101233123
+STATUS:CONFIRMED
+END:VEVENT
+END:VCALENDAR

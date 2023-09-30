@@ -31,7 +31,7 @@ import java.util.List;
 
 public class TeacherDashboard extends AppCompatActivity {
 DrawerLayout drawerLayout;
-    androidx.appcompat.widget.Toolbar  toolbar;
+androidx.appcompat.widget.Toolbar  toolbar;
 NavigationView navigationView;
 FirebaseAuth auth=FirebaseAuth.getInstance();
 FirebaseDatabase db=FirebaseDatabase.getInstance();
